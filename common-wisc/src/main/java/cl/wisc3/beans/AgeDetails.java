@@ -1,9 +1,10 @@
 package cl.wisc3.beans;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AgeDetails {
+public class AgeDetails implements Serializable {
 
     public static final int DAYS_IN_MONTH = 30;
     public static final int MONTHS_IN_YEAR = 12;

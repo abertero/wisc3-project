@@ -8,6 +8,10 @@ public enum AgeCalculator {
     INSTANCE;
 
     public AgeDetails calculate(Date dateOfTest, Date dateOfBirth) {
-        return (new AgeDetails(dateOfTest)).subtract(new AgeDetails(dateOfBirth));
+        return calculate(new AgeDetails(dateOfTest), new AgeDetails(dateOfBirth));
+    }
+
+    public AgeDetails calculate(AgeDetails dateOfTestDetail, AgeDetails dateOfBirthDetail) {
+        return (dateOfTestDetail).subtract(dateOfBirthDetail);
     }
 }

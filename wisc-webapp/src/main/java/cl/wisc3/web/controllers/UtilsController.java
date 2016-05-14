@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Calendar;
+
 @Controller
 @RequestMapping("/utils/*")
 public class UtilsController {
@@ -21,7 +23,14 @@ public class UtilsController {
 
     @RequestMapping(value = "ageCalculator", method = RequestMethod.GET)
     public ModelAndView ageCalculator() {
-        return new ModelAndView("ageCalculator");
+        ModelAndView mv = new ModelAndView("ageCalculator");
+        Calendar calendar = Calendar.getInstance();
+        AgeCalculatorHelper helper = new AgeCalculatorHelper();
+        helper.setTestDay(calendar.get(Calendar.DATE));
+        helper.setTestMonth(calendar.get(Calendar.MONTH) + 1);
+        helper.setTestYear(calendar.get(Calendar.YEAR));
+        mv.addObject("helper", helper);
+        return mv;
     }
 
     @RequestMapping(value = "calculateAge", method = RequestMethod.POST)

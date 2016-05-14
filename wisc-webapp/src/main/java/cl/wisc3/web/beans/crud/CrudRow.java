@@ -57,17 +57,17 @@ public class CrudRow {
         return listValues;
     }
 
-    public void addMappedValues(String... pairParams) {
+    public void addMappedValues(Object... pairParams) {
         if (pairParams.length % 2 == 0) {
             for (int i = 1; i < pairParams.length; i += 2) {
-                mappedValues.put(pairParams[i - 1], pairParams[i]);
+                mappedValues.put(pairParams[i - 1].toString(), pairParams[i].toString());
             }
         }
     }
 
-    public void addValues(String... values) {
-        for (String value : values) {
-            listValues.add(value);
+    public void addValues(Object... values) {
+        for (Object value : values) {
+            listValues.add(value.toString());
         }
     }
 

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CrudEditGeneratorService {
 
-    public CrudEdit getCrudEditByType(CrudType type, String altKey) {
+    public CrudEdit getCrudByType(CrudType type, String altKey) {
         switch (type) {
             case EVALUATION_DEFINITION:
                 return getEvaluationDefinitionCrud(altKey);
@@ -30,13 +30,13 @@ public class CrudEditGeneratorService {
 
     public CrudEdit getEvaluationDefinitionCrud(EvaluationDefinition definition) {
         CrudEdit crudEdit = new CrudEdit();
-        crudEdit.getRows().add(new CrudRow("id", String.valueOf(definition.getId()), CrudEditType.TEXT));
+        crudEdit.getRows().add(new CrudRow("id", definition.getId() != null ? String.valueOf(definition.getId()) : "", CrudEditType.TEXT));
         crudEdit.getRows().add(new CrudRow("altKey", definition.getAltKey(), CrudEditType.TEXT));
         crudEdit.getRows().add(new CrudRow("name", definition.getName(), CrudEditType.TEXT));
         crudEdit.getRows().add(new CrudRow("description", definition.getDescription(), CrudEditType.TEXT));
         crudEdit.getRows().add(new CrudRow("maxRange", String.valueOf(definition.getMaxRange()), CrudEditType.TEXT));
-        CrudRow typeSelectorRow = new CrudRow("type", definition.getType().name(), CrudEditType.SELECT);
-        typeSelectorRow.addMappedValues(EvaluationType.values());
+        CrudRow typeSelectorRow = new CrudRow("type", definition.getType() != null ? definition.getType().name() : "", CrudEditType.SELECT);
+        typeSelectorRow.addValues(EvaluationType.values());
         crudEdit.getRows().add(typeSelectorRow);
         return crudEdit;
     }

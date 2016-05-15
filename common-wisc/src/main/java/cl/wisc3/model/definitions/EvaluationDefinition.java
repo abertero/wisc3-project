@@ -7,6 +7,7 @@ import cl.wisc3.model.base.NamedBaseEntity;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.util.List;
 
 @Entity
 public class EvaluationDefinition extends NamedBaseEntity {
@@ -33,5 +34,9 @@ public class EvaluationDefinition extends NamedBaseEntity {
 
     public static EvaluationDefinition findByAltKey(String altKey) {
         return JPA.findByAltKey(EvaluationDefinition.class, altKey);
+    }
+
+    public static List<EvaluationDefinition> findAll() {
+        return JPA.findAll(EvaluationDefinition.class);
     }
 }

@@ -1,4 +1,4 @@
-package cl.wisc3.web.config;
+package cl.wisc3.config;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -54,7 +54,6 @@ public class JPA {
     }
 
     public static abstract class TxVoid implements Tx<Void> {
-        @Override
         public Void doTx() {
             doTx_();
             return null;

@@ -17,24 +17,24 @@ public class CrudRow {
 
     private String name;
     private String value;
-    private CrudType type;
+    private CrudEditType type;
     private Map<String, String> mappedValues = new HashMap<>();
     private List<String> listValues = new ArrayList<>();
 
-    public CrudRow(String name, String value, CrudType type) {
+    public CrudRow(String name, String value, CrudEditType type) {
         this.name = name;
         this.value = value;
         this.type = type;
     }
 
-    public CrudRow(String name, String value, CrudType type, Map<String, String> mappedValues) {
+    public CrudRow(String name, String value, CrudEditType type, Map<String, String> mappedValues) {
         this.name = name;
         this.value = value;
         this.type = type;
         this.mappedValues = mappedValues;
     }
 
-    public CrudRow(String name, String value, CrudType type, List<String> listValues) {
+    public CrudRow(String name, String value, CrudEditType type, List<String> listValues) {
         this.name = name;
         this.value = value;
         this.type = type;
@@ -45,7 +45,7 @@ public class CrudRow {
         return name;
     }
 
-    public CrudType getType() {
+    public CrudEditType getType() {
         return type;
     }
 

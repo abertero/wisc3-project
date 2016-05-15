@@ -1,5 +1,6 @@
 package cl.wisc3.model.definitions;
 
+import cl.wisc3.config.JPA;
 import cl.wisc3.enums.EvaluationType;
 import cl.wisc3.model.base.NamedBaseEntity;
 
@@ -28,5 +29,9 @@ public class EvaluationDefinition extends NamedBaseEntity {
 
     public void setType(EvaluationType type) {
         this.type = type;
+    }
+
+    public static EvaluationDefinition findByAltKey(String altKey) {
+        return JPA.findByAltKey(EvaluationDefinition.class, altKey);
     }
 }

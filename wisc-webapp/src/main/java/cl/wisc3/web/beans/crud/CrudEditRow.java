@@ -70,6 +70,9 @@ public class CrudEditRow {
     public String getHtml() {
         StringBuilder builder = new StringBuilder();
         switch (type) {
+            case READONLY:
+                builder.append(String.format("<input type='text' class='form-control' disabled name='values[%s]' id='%s' value='%s'/>", name, name, value));
+                break;
             case TEXT:
                 builder.append(String.format("<input type='text' class='form-control' name='values[%s]' id='%s' value='%s'/>", name, name, value));
                 break;

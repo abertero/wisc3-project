@@ -55,8 +55,8 @@ public class CrudEvaluationDefinition implements CrudBaseEntity {
     private CrudEdit getCrudEdit(EvaluationDefinition definition) {
         CrudType type = CrudType.EVALUATION_DEFINITION;
         CrudEdit crudEdit = new CrudEdit(definition.getAltKey(), type);
-        crudEdit.addRow(new CrudEditRow(type, "id", definition.getId() != null ? String.valueOf(definition.getId()) : "", CrudEditType.TEXT));
-        crudEdit.addRow(new CrudEditRow(type, "altKey", definition.getAltKey(), CrudEditType.TEXT));
+        crudEdit.addRow(new CrudEditRow(type, "id", definition.getId() != null ? String.valueOf(definition.getId()) : "", CrudEditType.READONLY));
+        crudEdit.addRow(new CrudEditRow(type, "altKey", definition.getAltKey(), CrudEditType.READONLY));
         crudEdit.addRow(new CrudEditRow(type, "name", definition.getName(), CrudEditType.TEXT));
         crudEdit.addRow(new CrudEditRow(type, "description", definition.getDescription(), CrudEditType.TEXT));
         crudEdit.addRow(new CrudEditRow(type, "maxRange", String.valueOf(definition.getMaxRange()), CrudEditType.TEXT));

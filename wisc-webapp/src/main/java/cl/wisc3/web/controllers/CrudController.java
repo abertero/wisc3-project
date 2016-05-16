@@ -7,6 +7,7 @@ import cl.wisc3.web.services.CrudEditGeneratorService;
 import cl.wisc3.web.services.CrudViewGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,6 +86,7 @@ public class CrudController {
     }
 
     @RequestMapping(value = "save/{entity}", method = RequestMethod.POST)
+    @Transactional
     public ModelAndView save(@PathVariable String entity, @ModelAttribute CrudEdit crud) {
         CrudType type = CrudType.getByName(entity);
         if (type != null) {

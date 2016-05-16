@@ -20,6 +20,7 @@
                 </c:forEach>
             </div>
             <button class="btn btn-primary" type="submit"><spring:message code="crud.save"/></button>
+            <button class="btn btn-default" type="button" onclick="location.href='${ctx}/crud/list/${entity}'"><spring:message code="crud.back"/></button>
         </form>
     </div>
 </div>

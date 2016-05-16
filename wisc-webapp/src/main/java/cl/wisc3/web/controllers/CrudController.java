@@ -89,7 +89,7 @@ public class CrudController {
         CrudType type = CrudType.getByName(entity);
         if (type != null) {
             editGeneratorService.save(crud);
-            return new ModelAndView(String.format("redirect:crud/list/%s", entity));
+            return new ModelAndView(String.format("redirect:/crud/list/%s", entity));
         } else {
             return new ModelAndView("redirect:/");
         }

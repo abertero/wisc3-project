@@ -3,12 +3,13 @@ package cl.wisc3.web.beans.crud;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.StandardToStringStyle;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CrudEdit {
+public class CrudEdit implements Serializable {
 
     private String altKey;
     private CrudType type;
@@ -45,6 +46,18 @@ public class CrudEdit {
 
     public void addRow(CrudEditRow row) {
         rows.put(row.getName(), row);
+    }
+
+    public void setAltKey(String altKey) {
+        this.altKey = altKey;
+    }
+
+    public void setType(CrudType type) {
+        this.type = type;
+    }
+
+    public void setValues(Map<String, String> values) {
+        this.values = values;
     }
 
     @Override

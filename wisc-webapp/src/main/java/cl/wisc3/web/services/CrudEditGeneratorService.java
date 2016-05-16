@@ -20,4 +20,12 @@ public class CrudEditGeneratorService {
                 return new CrudEdit("", null);
         }
     }
+
+    public void save(CrudEdit crud) {
+        switch (crud.getType()) {
+            case EVALUATION_DEFINITION:
+                crudEvaluationDefinition.save(crud);
+                break;
+        }
+    }
 }

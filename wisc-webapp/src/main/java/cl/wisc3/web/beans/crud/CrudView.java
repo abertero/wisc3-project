@@ -1,5 +1,8 @@
 package cl.wisc3.web.beans.crud;
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang.builder.StandardToStringStyle;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,5 +20,10 @@ public class CrudView {
 
     public Map<String, String> getAttributeValue() {
         return attributeValue;
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this, new StandardToStringStyle());
     }
 }

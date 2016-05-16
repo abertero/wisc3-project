@@ -31,6 +31,7 @@ public class CrudController {
             ModelAndView mv = new ModelAndView("crud-list");
             List<CrudView> cruds = viewGeneratorService.getCrudListByType(type);
             mv.addObject("cruds", cruds);
+            mv.addObject("title", type.getTitle());
             mv.addObject("entity", entity);
             return mv;
         } else {
@@ -45,6 +46,7 @@ public class CrudController {
             ModelAndView mv = new ModelAndView("crud-edit");
             CrudEdit crud = editGeneratorService.getCrudByType(type, null);
             mv.addObject("crud", crud);
+            mv.addObject("title", type.getTitle());
             mv.addObject("entity", entity);
             return mv;
         } else {
@@ -59,6 +61,7 @@ public class CrudController {
             ModelAndView mv = new ModelAndView("crud-edit");
             CrudEdit crud = editGeneratorService.getCrudByType(type, altKey);
             mv.addObject("crud", crud);
+            mv.addObject("title", type.getTitle());
             mv.addObject("entity", entity);
             return mv;
         } else {
@@ -73,6 +76,7 @@ public class CrudController {
             ModelAndView mv = new ModelAndView("crud-view");
             CrudView crud = viewGeneratorService.getCrudByType(type, altKey);
             mv.addObject("crud", crud);
+            mv.addObject("title", type.getTitle());
             mv.addObject("entity", entity);
             return mv;
         } else {
@@ -82,6 +86,12 @@ public class CrudController {
 
     @RequestMapping(value = "save/{entity}", method = RequestMethod.POST)
     public ModelAndView save(@PathVariable String entity, @ModelAttribute CrudEdit crud) {
-        return new ModelAndView(String.format("redirect:crud/list/%s", entity));
+        CrudType type = CrudType.getByName(entity);
+        if (type != null) {
+            editGeneratorService.save(crud);
+            return new ModelAndView(String.format("redirect:crud/list/%s", entity));
+        } else {
+            return new ModelAndView("redirect:/");
+        }
     }
 }

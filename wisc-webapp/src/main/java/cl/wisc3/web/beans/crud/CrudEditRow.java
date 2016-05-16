@@ -9,36 +9,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CrudRow {
+public class CrudEditRow {
     private static final String TEXTAREA_COLS = "cols";
     private static final String TEXTAREA_ROWS = "rows";
     private static final String TEXTAREA_COLS_DEFAULT = "3";
     private static final String TEXTAREA_ROWS_DEFAULT = "20";
 
     private String name;
+    private String displayName;
     private String value;
     private CrudEditType type;
     private Map<String, String> mappedValues = new HashMap<>();
     private List<String> listValues = new ArrayList<>();
 
-    public CrudRow(String name, String value, CrudEditType type) {
+    public CrudEditRow(CrudType type, String name, String value, CrudEditType editType) {
         this.name = name;
         this.value = value;
-        this.type = type;
-    }
-
-    public CrudRow(String name, String value, CrudEditType type, Map<String, String> mappedValues) {
-        this.name = name;
-        this.value = value;
-        this.type = type;
-        this.mappedValues = mappedValues;
-    }
-
-    public CrudRow(String name, String value, CrudEditType type, List<String> listValues) {
-        this.name = name;
-        this.value = value;
-        this.type = type;
-        this.listValues = listValues;
+        this.type = editType;
+        this.displayName = String.format("crud.%s.displayName.%s", type.getName(), name);
     }
 
     public String getName() {
@@ -47,6 +35,14 @@ public class CrudRow {
 
     public CrudEditType getType() {
         return type;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public String getValue() {
+        return value;
     }
 
     public Map<String, String> getMappedValues() {
@@ -75,10 +71,10 @@ public class CrudRow {
         StringBuilder builder = new StringBuilder();
         switch (type) {
             case TEXT:
-                builder.append(String.format("<input type='text' name='%s' id='%s' value='%s'/>", name, name, value));
+                builder.append(String.format("<input type='text' class='form-control' name='values[%s]' id='%s' value='%s'/>", name, name, value));
                 break;
             case TEXTAREA:
-                builder.append(String.format("<textarea name='%s' id='%s' cols='%s' rows='%d'>%s</textarea>",
+                builder.append(String.format("<textarea class='form-control' name='values[%s]' id='%s' cols='%s' rows='%d'>%s</textarea>",
                         name,
                         name,
                         StringUtils.defaultIfEmpty(mappedValues.get(TEXTAREA_COLS), TEXTAREA_COLS_DEFAULT),
@@ -86,7 +82,7 @@ public class CrudRow {
                         value));
                 break;
             case SELECT:
-                builder.append(String.format("<select name='%s' id='%s'>", name, name));
+                builder.append(String.format("<select class='form-control' name='values[%s]' id='%s'>", name, name));
                 for (Map.Entry<String, String> entry : mappedValues.entrySet()) {
                     builder.append(String.format("<option %s value='%s'>%s</option>", entry.getKey().equals(value) ? "selected" : "", entry.getKey(), entry.getValue()));
                 }

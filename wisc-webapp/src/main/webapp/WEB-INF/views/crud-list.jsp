@@ -3,7 +3,7 @@
 <%@include file="general/header.jspf" %>
 <body>
 
-<h1><spring:message code="home.title"/></h1>
+<h1><spring:message code="${title}"/></h1>
 
 <c:if test="${not empty cruds}">
     <c:set var="first" value="${cruds[0]}"/>
@@ -30,6 +30,6 @@
     <p><spring:message code="cruds.empty"/></p>
 </c:if>
 
-<button type="button" onclick="location.href='${ctx}/crud/edit/${entity}'"><spring:message code="cruds.create"/> </button>
+<button class="btn btn-primary" type="button" onclick="location.href='${ctx}/crud/edit/${entity}'"><spring:message code="cruds.create"/> </button>
 </body>
 </html>

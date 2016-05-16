@@ -1,13 +1,19 @@
 package cl.wisc3.model.base;
 
+import cl.wisc3.config.JPA;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.StandardToStringStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.UUID;
 
 @MappedSuperclass
 public abstract class BaseEntity {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BaseEntity.class);
+
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @TableGenerator(name = "appSeqStore", table = "app_seq_store", pkColumnName = "APP_SEQ_NAME",
@@ -44,4 +50,19 @@ public abstract class BaseEntity {
         return ReflectionToStringBuilder.toString(this, new StandardToStringStyle());
     }
     //</editor-fold>
+
+    public boolean save() {
+        try {
+            if (!JPA.em().contains(this)) {
+                JPA.em().persist(this);
+            } else {
+                JPA.em().flush();
+            }
+            LOGGER.info(String.format("Modified entity %s", this));
+            return true;
+        } catch (Exception e) {
+            LOGGER.error("Exception modifying order", e);
+        }
+        return false;
+    }
 }

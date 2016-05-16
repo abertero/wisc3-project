@@ -12,4 +12,6 @@ public interface CrudBaseEntity {
     CrudView getCrudView(String altKey);
 
     List<CrudView> getList();
+
+    void save(CrudEdit crudEdit);
 }

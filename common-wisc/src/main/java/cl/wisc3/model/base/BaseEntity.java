@@ -13,6 +13,7 @@ import java.util.UUID;
 public abstract class BaseEntity {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseEntity.class);
+    public static final String ORDER = "entityOrder";
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)

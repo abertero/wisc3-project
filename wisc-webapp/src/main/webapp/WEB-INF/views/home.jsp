@@ -10,6 +10,8 @@
         <li><a href="${ctx}/utils/ageCalculator"><spring:message code="home.ref.ageCalculator"/></a></li>
         <li><a href="${ctx}/crud/list/evaluacion"><spring:message
                 code="home.ref.cruds.evaluacion"/></a></li>
+        <li><a href="${ctx}/crud/list/childlevel"><spring:message
+                code="home.ref.cruds.childlevel"/></a></li>
     </ul>
 </div>
 

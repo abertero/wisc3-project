@@ -8,8 +8,8 @@
 <div>
     <ul>
         <li><a href="${ctx}/utils/ageCalculator"><spring:message code="home.ref.ageCalculator"/></a></li>
-        <li><a href="${ctx}/definitions/equivalentScores"><spring:message
-                code="home.ref.definitions.equivalentScores"/></a></li>
+        <li><a href="${ctx}/crud/list/evaluacion"><spring:message
+                code="home.ref.cruds.evaluacion"/></a></li>
     </ul>
 </div>
 

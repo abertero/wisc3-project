@@ -56,6 +56,10 @@ public class CrudEdit implements Serializable {
         this.type = type;
     }
 
+    public Map<String, String> getValues() {
+        return values;
+    }
+
     public void setValues(Map<String, String> values) {
         this.values = values;
     }

@@ -45,6 +45,7 @@ public class CrudEvaluationDefinition implements CrudBaseEntity {
         if (StringUtils.isNotBlank(crudEdit.getAltKey())) {
             definition = EvaluationDefinition.findByAltKey(crudEdit.getAltKey());
         }
+        definition.setEntityOrder(NumberUtils.toLong(crudEdit.getValue("entityOrder"), 1000));
         definition.setName(crudEdit.getValue("name"));
         definition.setDescription(crudEdit.getValue("description"));
         definition.setType(EvaluationType.getByName(crudEdit.getValue("type")));
@@ -57,6 +58,7 @@ public class CrudEvaluationDefinition implements CrudBaseEntity {
         CrudEdit crudEdit = new CrudEdit(definition.getAltKey(), type);
         crudEdit.addRow(new CrudEditRow(type, "id", definition.getId() != null ? String.valueOf(definition.getId()) : "", CrudEditType.READONLY));
         crudEdit.addRow(new CrudEditRow(type, "altKey", definition.getAltKey(), CrudEditType.READONLY));
+        crudEdit.addRow(new CrudEditRow(type, "entityOrder", definition.getEntityOrder() != null ? String.valueOf(definition.getEntityOrder()) : "", CrudEditType.TEXT));
         crudEdit.addRow(new CrudEditRow(type, "name", definition.getName(), CrudEditType.TEXT));
         crudEdit.addRow(new CrudEditRow(type, "description", definition.getDescription(), CrudEditType.TEXT));
         crudEdit.addRow(new CrudEditRow(type, "maxRange", String.valueOf(definition.getMaxRange()), CrudEditType.TEXT));
@@ -70,6 +72,7 @@ public class CrudEvaluationDefinition implements CrudBaseEntity {
         CrudView crudView = new CrudView(definition.getAltKey());
         crudView.getAttributeValue().put("crud.evaluacion.displayName.id", definition.getId() != null ? String.valueOf(definition.getId()) : "");
         crudView.getAttributeValue().put("crud.evaluacion.displayName.altKey", definition.getAltKey());
+        crudView.getAttributeValue().put("crud.evaluacion.displayName.entityOrder", definition.getEntityOrder() != null ? String.valueOf(definition.getEntityOrder()) : "");
         crudView.getAttributeValue().put("crud.evaluacion.displayName.name", definition.getName());
         crudView.getAttributeValue().put("crud.evaluacion.displayName.description", definition.getDescription());
         crudView.getAttributeValue().put("crud.evaluacion.displayName.maxRange", String.valueOf(definition.getMaxRange()));

@@ -20,6 +20,7 @@ public abstract class BaseEntity {
             pkColumnValue = "APP_SEQ_GEN", valueColumnName = "APP_SEQ_VALUE", initialValue = 1, allocationSize = 1)
     protected Long id;
     protected String altKey;
+    protected Long entityOrder;
 
     //<editor-fold desc="Getters and Setters">
     @PrePersist
@@ -42,6 +43,14 @@ public abstract class BaseEntity {
     public void setAltKey(String altKey) {
         this.altKey = altKey;
     }
+
+    public Long getEntityOrder() {
+        return entityOrder;
+    }
+
+    public void setEntityOrder(Long entityOrder) {
+        this.entityOrder = entityOrder;
+    }
     //</editor-fold>
 
     //<editor-fold desc="Methods">
@@ -61,7 +70,7 @@ public abstract class BaseEntity {
             LOGGER.info(String.format("Modified entity %s", this));
             return true;
         } catch (Exception e) {
-            LOGGER.error("Exception modifying order", e);
+            LOGGER.error("Exception modifying entity", e);
         }
         return false;
     }

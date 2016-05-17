@@ -39,4 +39,8 @@ public class EvaluationDefinition extends NamedBaseEntity {
     public static List<EvaluationDefinition> findAll() {
         return JPA.findAll(EvaluationDefinition.class, ORDER);
     }
+
+    public static List<EvaluationDefinition> findByEvaluationType(EvaluationType type) {
+        return JPA.query("SELECT d FROM EvaluationDefinition d WHERE d.type = ?1 ORDER BY d.entityOrder", type);
+    }
 }

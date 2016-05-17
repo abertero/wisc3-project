@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class EquivalentScoreDefinition extends BaseEntity {
+    public static int MAX_EQUIVALENT_SCORE = 19;
+
     private int evaluationScore;
     private int equivalentScore;
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,5 +1,6 @@
 package cl.wisc3.model.definitions;
 
+import cl.wisc3.config.JPA;
 import cl.wisc3.model.base.BaseEntity;
 import cl.wisc3.model.child.ChildLevel;
 import org.apache.commons.lang.StringUtils;
@@ -8,12 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Entity
-public class EquivalentScoreTableRow extends BaseEntity {
+public class EquivalentScoreTableColumn extends BaseEntity {
 
     private static final String ROW_STRING_REGEX = "#!#";
     private String rowString;
@@ -65,5 +64,9 @@ public class EquivalentScoreTableRow extends BaseEntity {
         this.rowString = builder.toString();
         this.rowList.clear();
         this.rowList.addAll(rowList);
+    }
+
+    public static List<EquivalentScoreTableColumn> findListByChildLevel(String childLevelAltKey) {
+        return JPA.query("SELECT es FROM EquivalentScoreTableColumn es INNER JOIN es.childLevel cl WHERE cl.altKey = ?1 ORDER BY es.entityOrder", childLevelAltKey);
     }
 }

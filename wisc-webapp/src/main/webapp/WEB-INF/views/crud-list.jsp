@@ -9,12 +9,15 @@
     <c:set var="first" value="${cruds[0]}"/>
     <div>
         <table class="table table-bordered">
+            <thead>
             <tr>
                 <c:forEach items="${first.attributeValue}" var="entry">
                     <th><spring:message code="${entry.key}"/></th>
                 </c:forEach>
                 <th>&nbsp;</th>
             </tr>
+            </thead>
+            <tbody>
             <c:forEach items="${cruds}" var="crud">
                 <tr>
                     <c:forEach items="${crud.attributeValue}" var="entry">
@@ -32,6 +35,7 @@
                     </td>
                 </tr>
             </c:forEach>
+            </tbody>
         </table>
     </div>
 </c:if>

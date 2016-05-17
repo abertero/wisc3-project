@@ -20,9 +20,9 @@ public class EquivalentScoreTableColumn extends BaseEntity {
     private static final int WRONG_INT_VALUE = -1;
 
     private String rowString;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private ChildLevel childLevel;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private EvaluationDefinition evaluationDefinition;
     @Transient
     public List<String> rowList = new ArrayList<String>();

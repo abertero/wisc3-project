@@ -23,7 +23,7 @@ public class UtilsController {
 
     @RequestMapping(value = "ageCalculator", method = RequestMethod.GET)
     public ModelAndView ageCalculator() {
-        ModelAndView mv = new ModelAndView("ageCalculator");
+        ModelAndView mv = new ModelAndView("age-calculator");
         Calendar calendar = Calendar.getInstance();
         AgeCalculatorHelper helper = new AgeCalculatorHelper();
         helper.setTestDay(calendar.get(Calendar.DATE));

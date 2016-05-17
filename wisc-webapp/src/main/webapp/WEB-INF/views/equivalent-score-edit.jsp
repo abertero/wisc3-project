@@ -30,7 +30,7 @@
                     <td class="text-center"><c:out value="${i}"/></td>
                     <c:forEach items="${verbalDefinitions}" var="definition">
                         <td class="td-center cell_${definition.altKey}"><input type="text"
-                                                                               name="values[${i}#${definition.altKey}]"
+                                                                               name="${i}#${definition.altKey}"
                                                                                class="input-field input-sm"
                                                                                data-alt-key="${definition.altKey}"
                                                                                data-range="${definition.maxRange}"
@@ -63,13 +63,14 @@
                 <tr>
                     <td class="text-center"><c:out value="${i}"/></td>
                     <c:forEach items="${executionDefinitions}" var="definition">
-                        <td class="td-center cell_${definition.altKey}"><input type="text" name="values[${i}#${definition.altKey}]"
-                                                     class="input-field input-sm"
-                                                     data-alt-key="${definition.altKey}"
-                                                     data-range="${definition.maxRange}"
-                                                     id="cell_${definition.altKey}_${i}"
-                                                     value="${tableColumnsByDefinition[definition.altKey][i]}"
-                                                     size="4"/></td>
+                        <td class="td-center cell_${definition.altKey}"><input type="text"
+                                                                               name="${i}#${definition.altKey}"
+                                                                               class="input-field input-sm"
+                                                                               data-alt-key="${definition.altKey}"
+                                                                               data-range="${definition.maxRange}"
+                                                                               id="cell_${definition.altKey}_${i}"
+                                                                               value="${tableColumnsByDefinition[definition.altKey][i]}"
+                                                                               size="4"/></td>
                     </c:forEach>
                     <td class="text-center"><c:out value="${i}"/></td>
                 </tr>
@@ -77,6 +78,8 @@
             </tbody>
         </table>
     </div>
+
+    <button type="submit" class="btn btn-primary"><spring:message code="equivalentScore.edit.save"/></button>
 </form>
 
 <script type="text/javascript">

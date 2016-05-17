@@ -1,5 +1,6 @@
 package cl.wisc3.model.definitions;
 
+import cl.wisc3.config.JPA;
 import cl.wisc3.model.base.BaseEntity;
 import cl.wisc3.model.child.ChildLevel;
 
@@ -58,5 +59,9 @@ public class EquivalentScoreDefinition extends BaseEntity {
 
     public void setEvaluationDefinition(EvaluationDefinition evaluationDefinition) {
         this.evaluationDefinition = evaluationDefinition;
+    }
+
+    public static EquivalentScoreDefinition findByChildLevelAndEvaluationDefinitionAndEvaluationScore(String childLevelAltKey, String evaluationDefinitionAltKey, Integer evaluationScore) {
+        return JPA.queryFirst("SELECT ec FROM EquivalentScoreDefinition ec INNER JOIN ec.childLevel cl INNER JOIN ec.evaluationDefinition ed WHERE cl.altKey = ?1 AND ed.altKey = ?2 AND ec.evaluationScore = ?3", childLevelAltKey, evaluationDefinitionAltKey, evaluationScore);
     }
 }

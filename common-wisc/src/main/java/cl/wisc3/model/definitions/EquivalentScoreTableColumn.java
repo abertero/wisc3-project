@@ -15,7 +15,7 @@ import java.util.*;
 @Entity
 public class EquivalentScoreTableColumn extends BaseEntity {
 
-    private static final String ROW_STRING_REGEX = "#!#";
+    public static final String ROW_STRING_REGEX = "#!#";
     private static final String CELL_SPLIT_CHAR = "-";
     private static final int WRONG_INT_VALUE = -1;
 
@@ -26,6 +26,14 @@ public class EquivalentScoreTableColumn extends BaseEntity {
     private EvaluationDefinition evaluationDefinition;
     @Transient
     public List<String> rowList = new ArrayList<String>();
+
+    public EquivalentScoreTableColumn() {
+    }
+
+    public EquivalentScoreTableColumn(ChildLevel childLevel, EvaluationDefinition evaluationDefinition) {
+        this.childLevel = childLevel;
+        this.evaluationDefinition = evaluationDefinition;
+    }
 
     public String getRowString() {
         return rowString;
@@ -120,7 +128,7 @@ public class EquivalentScoreTableColumn extends BaseEntity {
                     result.put(NumberUtils.toInt(elements), i);
                 } else {
                     String[] splitElements = elements.split(CELL_SPLIT_CHAR);
-                    for (int j = NumberUtils.toInt(splitElements[0]); j < NumberUtils.toInt(splitElements[1]); ++j) {
+                    for (int j = NumberUtils.toInt(splitElements[0]); j <= NumberUtils.toInt(splitElements[1]); ++j) {
                         result.put(j, i);
                     }
                 }
@@ -150,5 +158,9 @@ public class EquivalentScoreTableColumn extends BaseEntity {
             return intValue;
         }
         return WRONG_INT_VALUE;
+    }
+
+    public static EquivalentScoreTableColumn findByChildLevenAndEvaluationDefinition(String childLevelAltKey, String evaluationDefinitionAltKey) {
+        return JPA.queryFirst("SELECT tc FROM EquivalentScoreTableColumn tc INNER JOIN tc.childLevel cl INNER JOIN tc.evaluationDefinition ed WHERE cl.altKey = ?1 AND ed.altKey = ?2", childLevelAltKey, evaluationDefinitionAltKey);
     }
 }

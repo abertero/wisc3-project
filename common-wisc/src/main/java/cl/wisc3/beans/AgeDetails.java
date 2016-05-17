@@ -15,13 +15,13 @@ public class AgeDetails implements Serializable {
     public AgeDetails(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        days = calendar.get(Calendar.DATE);
+        days = Math.min(DAYS_IN_MONTH, calendar.get(Calendar.DATE));
         months = calendar.get(Calendar.MONTH) + 1;
         years = calendar.get(Calendar.YEAR);
     }
 
     public AgeDetails(int days, int months, int years) {
-        this.days = days;
+        this.days = Math.min(DAYS_IN_MONTH, days);
         this.months = months;
         this.years = years;
     }

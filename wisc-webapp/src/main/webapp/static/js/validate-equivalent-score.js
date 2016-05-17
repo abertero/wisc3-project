@@ -46,7 +46,7 @@ function validateValueIsOneGreaterThanCurrent(valueToValidate, currentMaxValue) 
     if (intValue - currentMaxValue != 1) {
         return -1;
     }
-    return valueToValidate;
+    return intValue;
 }
 
 function validateIfValueIsGreater(valueToValidate, valueToCompare) {

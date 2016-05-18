@@ -80,6 +80,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary"><spring:message code="equivalentScore.edit.save"/></button>
+    <button class="btn btn-default" type="button" onclick="location.href='${ctx}/definition/score/equivalent/level'"><spring:message code="crud.back"/></button>
 </form>
 
 <script type="text/javascript">

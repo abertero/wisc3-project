@@ -27,7 +27,7 @@
             <tbody>
             <c:forEach begin="1" end="${maxEquivalentScore}" var="i">
                 <tr>
-                    <td class="text-center"><c:out value="${i}"/></td>
+                    <td class="text-center"><span class="span-bold"><c:out value="${i}"/></span></td>
                     <c:forEach items="${verbalDefinitions}" var="definition">
                         <td class="td-center cell_${definition.altKey}"><input type="text"
                                                                                name="${i}#${definition.altKey}"
@@ -38,7 +38,7 @@
                                                                                value="${tableColumnsByDefinition[definition.altKey][i]}"
                                                                                size="4"/></td>
                     </c:forEach>
-                    <td class="text-center"><c:out value="${i}"/></td>
+                    <td class="text-center"><span class="span-bold"><c:out value="${i}"/></span></td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -61,7 +61,7 @@
             <tbody>
             <c:forEach begin="1" end="${maxEquivalentScore}" var="i">
                 <tr>
-                    <td class="text-center"><c:out value="${i}"/></td>
+                    <td class="text-center"><span class="span-bold"><c:out value="${i}"/></span></td>
                     <c:forEach items="${executionDefinitions}" var="definition">
                         <td class="td-center cell_${definition.altKey}"><input type="text"
                                                                                name="${i}#${definition.altKey}"
@@ -72,7 +72,7 @@
                                                                                value="${tableColumnsByDefinition[definition.altKey][i]}"
                                                                                size="4"/></td>
                     </c:forEach>
-                    <td class="text-center"><c:out value="${i}"/></td>
+                    <td class="text-center"><span class="span-bold"><c:out value="${i}"/></span></td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -80,7 +80,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary"><spring:message code="equivalentScore.edit.save"/></button>
-    <button class="btn btn-default" type="button" onclick="location.href='${ctx}/definition/score/equivalent/level'"><spring:message code="crud.back"/></button>
+    <button class="btn btn-default" type="button" onclick="location.href='${ctx}/definition/score/equivalent/level'"><spring:message code="equivalentScore.back"/></button>
 </form>
 
 <script type="text/javascript">

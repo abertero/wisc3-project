@@ -45,6 +45,18 @@ public class EquivalentScoreController {
         return mv;
     }
 
+    @RequestMapping(value = "equivalent/view/{childLevelAltKey}", method = RequestMethod.GET)
+    public ModelAndView viewEquivalentScore(@PathVariable String childLevelAltKey) {
+        ModelAndView mv = new ModelAndView("equivalent-score-view");
+        mv.addObject("childLevel", childLevelService.getByAltKey(childLevelAltKey));
+        mv.addObject("tableColumnsByDefinition", equivalentScoreDefinitionService.getTableColumnsMapWithDefinitionKeyFromChildLevelKey(childLevelAltKey));
+        mv.addObject("executionDefinitions", evaluationDefinitionService.findByEvaluationType(EvaluationType.EXECUTION));
+        mv.addObject("verbalDefinitions", evaluationDefinitionService.findByEvaluationType(EvaluationType.VERBAL));
+        mv.addObject("maxEquivalentScore", EquivalentScoreDefinition.MAX_EQUIVALENT_SCORE);
+        return mv;
+    }
+
+
     @RequestMapping(value = "equivalent/save/{childLevelAltKey}", method = RequestMethod.POST)
     @Transactional
     public ModelAndView saveEquivalentScore(@PathVariable String childLevelAltKey, @RequestParam Map<String, String> values) {

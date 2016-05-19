@@ -1,4 +1,3 @@
-/* six years inferior */
 INSERT INTO wisc3_project.equivalent_score_definition (id, alt_key, entity_order, equivalent_score, evaluation_score, child_level, evaluation_definition) VALUES (32768, '37048e29-7e04-48b4-b62f-b2ee2d094f2f', null, 2, 0, 1, 65536);
 INSERT INTO wisc3_project.equivalent_score_definition (id, alt_key, entity_order, equivalent_score, evaluation_score, child_level, evaluation_definition) VALUES (32769, '75330d98-360a-4bc4-8480-3dbdae672191', null, 4, 1, 1, 65536);
 INSERT INTO wisc3_project.equivalent_score_definition (id, alt_key, entity_order, equivalent_score, evaluation_score, child_level, evaluation_definition) VALUES (32770, 'c1911044-70b6-41e5-8d55-a30f59aa305a', null, 7, 2, 1, 65536);

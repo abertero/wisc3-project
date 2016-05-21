@@ -1,4 +1,4 @@
-function validateRow(definitionKey, equivalentMaxRange, definitionRange) {
+function validateRow(definitionKey, equivalentMaxRange, definitionRange, definitionAlternativeRange) {
     var currentMaxRange = -1;
     for (var i = 1; i <= equivalentMaxRange; ++i) {
         var $elem = $("#cell_" + definitionKey + "_" + i);
@@ -32,10 +32,13 @@ function validateRow(definitionKey, equivalentMaxRange, definitionRange) {
             }
         }
     }
-    if (currentMaxRange != definitionRange) {
+    if (currentMaxRange == definitionRange) {
+        return true;
+    } else if (definitionAlternativeRange != undefined && currentMaxRange == definitionAlternativeRange) {
+        return true;
+    } else {
         return false;
     }
-    return true;
 }
 
 function validateValueIsOneGreaterThanCurrent(valueToValidate, currentMaxValue) {

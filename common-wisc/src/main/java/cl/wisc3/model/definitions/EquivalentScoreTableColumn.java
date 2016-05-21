@@ -113,10 +113,13 @@ public class EquivalentScoreTableColumn extends BaseEntity {
             }
         }
         int maxRange = evaluationDefinition.getMaxRange();
-        if (currentMax != maxRange) {
+        if (currentMax == maxRange) {
+            return true;
+        } else if (currentMax == evaluationDefinition.getAlternativeMaxRange()) {
+            return true;
+        } else {
             return false;
         }
-        return true;
     }
 
     public Map<Integer, Integer> getEquivalentScores() {

@@ -13,6 +13,7 @@ import java.util.List;
 public class EvaluationDefinition extends NamedBaseEntity {
 
     private int maxRange;
+    private int alternativeMaxRange;
     @Enumerated(EnumType.STRING)
     private EvaluationType type;
 
@@ -22,6 +23,14 @@ public class EvaluationDefinition extends NamedBaseEntity {
 
     public void setMaxRange(int maxRange) {
         this.maxRange = maxRange;
+    }
+
+    public int getAlternativeMaxRange() {
+        return alternativeMaxRange;
+    }
+
+    public void setAlternativeMaxRange(int alternativeMaxRange) {
+        this.alternativeMaxRange = alternativeMaxRange;
     }
 
     public EvaluationType getType() {

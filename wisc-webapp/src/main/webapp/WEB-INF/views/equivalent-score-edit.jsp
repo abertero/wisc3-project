@@ -34,6 +34,7 @@
                                                                                class="input-field input-sm"
                                                                                data-alt-key="${definition.altKey}"
                                                                                data-range="${definition.maxRange}"
+                                                                               data-alternative-range="${definition.alternativeMaxRange}"
                                                                                id="cell_${definition.altKey}_${i}"
                                                                                value="${tableColumnsByDefinition[definition.altKey][i]}"
                                                                                size="4"/></td>
@@ -68,6 +69,7 @@
                                                                                class="input-field input-sm"
                                                                                data-alt-key="${definition.altKey}"
                                                                                data-range="${definition.maxRange}"
+                                                                               data-alternative-range="${definition.alternativeMaxRange}"
                                                                                id="cell_${definition.altKey}_${i}"
                                                                                value="${tableColumnsByDefinition[definition.altKey][i]}"
                                                                                size="4"/></td>
@@ -91,9 +93,14 @@
                 var altKey = $(this).data("altKey");
                 var equivalentMaxRange = parseInt(equivalentMaxRangeString);
                 var definitionRangeString = $(this).data("range");
+                var alternativeRangeString = $(this).data("alternativeRange");
                 if (!isNaN(definitionRangeString)) {
                     var definitionRange = parseInt(definitionRangeString);
-                    if (validateRow(altKey, equivalentMaxRange, definitionRange)) {
+                    var alternativeRange = 0;
+                    if (!isNaN(alternativeRangeString)) {
+                        alternativeRange = parseInt(alternativeRangeString);
+                    }
+                    if (validateRow(altKey, equivalentMaxRange, definitionRange, alternativeRange)) {
                         $("td.cell_" + altKey).removeClass("danger");
                         $("td.cell_" + altKey).addClass("success");
                     } else {

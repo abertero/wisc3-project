@@ -50,6 +50,7 @@ public class CrudEvaluationDefinition implements CrudBaseEntity {
         definition.setDescription(crudEdit.getValue("description"));
         definition.setType(EvaluationType.getByName(crudEdit.getValue("type")));
         definition.setMaxRange(NumberUtils.toInt(crudEdit.getValue("maxRange")));
+        definition.setAlternativeMaxRange(NumberUtils.toInt(crudEdit.getValue("alternativeMaxRange")));
         definition.save();
     }
 
@@ -62,6 +63,7 @@ public class CrudEvaluationDefinition implements CrudBaseEntity {
         crudEdit.addRow(new CrudEditRow(type, "name", definition.getName(), CrudEditType.TEXT));
         crudEdit.addRow(new CrudEditRow(type, "description", definition.getDescription(), CrudEditType.TEXT));
         crudEdit.addRow(new CrudEditRow(type, "maxRange", String.valueOf(definition.getMaxRange()), CrudEditType.TEXT));
+        crudEdit.addRow(new CrudEditRow(type, "alternativeMaxRange", String.valueOf(definition.getAlternativeMaxRange()), CrudEditType.TEXT));
         CrudEditRow typeSelectorRow = new CrudEditRow(type, "type", definition.getType() != null ? definition.getType().name() : "", CrudEditType.SELECT);
         typeSelectorRow.addValues(EvaluationType.values());
         crudEdit.addRow(typeSelectorRow);
@@ -76,6 +78,7 @@ public class CrudEvaluationDefinition implements CrudBaseEntity {
         crudView.getAttributeValue().put("crud.evaluacion.displayName.name", definition.getName());
         crudView.getAttributeValue().put("crud.evaluacion.displayName.description", definition.getDescription());
         crudView.getAttributeValue().put("crud.evaluacion.displayName.maxRange", String.valueOf(definition.getMaxRange()));
+        crudView.getAttributeValue().put("crud.evaluacion.displayName.alternativeMaxRange", String.valueOf(definition.getAlternativeMaxRange()));
         crudView.getAttributeValue().put("crud.evaluacion.displayName.type", definition.getType() != null ? definition.getType().name() : "");
         return crudView;
     }

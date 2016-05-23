@@ -38,20 +38,20 @@ public class CrudChildLevel implements CrudBaseEntity {
 
     @Override
     public void save(CrudEdit crudEdit) {
-        ChildLevel definition = new ChildLevel();
+        ChildLevel childLevel = new ChildLevel();
         if (StringUtils.isNotBlank(crudEdit.getAltKey())) {
-            definition = ChildLevel.findByAltKey(crudEdit.getAltKey());
+            childLevel = ChildLevel.findByAltKey(crudEdit.getAltKey());
         }
-        definition.setEntityOrder(NumberUtils.toLong(crudEdit.getValue("entityOrder"), 1000));
-        definition.setName(crudEdit.getValue("name"));
-        definition.setDescription(crudEdit.getValue("description"));
-        definition.setDaysStart(NumberUtils.toInt(crudEdit.getValue("daysStart")));
-        definition.setMonthsStart(NumberUtils.toInt(crudEdit.getValue("monthsStart")));
-        definition.setYearsStart(NumberUtils.toInt(crudEdit.getValue("yearsStart")));
-        definition.setDaysEnd(NumberUtils.toInt(crudEdit.getValue("daysEnd")));
-        definition.setMonthsEnd(NumberUtils.toInt(crudEdit.getValue("monthsEnd")));
-        definition.setYearsEnd(NumberUtils.toInt(crudEdit.getValue("yearsEnd")));
-        definition.save();
+        childLevel.setEntityOrder(NumberUtils.toLong(crudEdit.getValue("entityOrder"), 1000));
+        childLevel.setName(crudEdit.getValue("name"));
+        childLevel.setDescription(crudEdit.getValue("description"));
+        childLevel.setDaysStart(NumberUtils.toInt(crudEdit.getValue("daysStart")));
+        childLevel.setMonthsStart(NumberUtils.toInt(crudEdit.getValue("monthsStart")));
+        childLevel.setYearsStart(NumberUtils.toInt(crudEdit.getValue("yearsStart")));
+        childLevel.setDaysEnd(NumberUtils.toInt(crudEdit.getValue("daysEnd")));
+        childLevel.setMonthsEnd(NumberUtils.toInt(crudEdit.getValue("monthsEnd")));
+        childLevel.setYearsEnd(NumberUtils.toInt(crudEdit.getValue("yearsEnd")));
+        childLevel.save();
     }
 
     private CrudEdit getCrudEdit(ChildLevel childLevel) {

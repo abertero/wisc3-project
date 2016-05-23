@@ -4,12 +4,12 @@ import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.StandardToStringStyle;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CrudView implements Serializable {
     private String altKey;
-    private Map<String, String> attributeValue = new HashMap<>();
+    private Map<String, String> attributeValue = new LinkedHashMap<>();
 
     public CrudView(String altKey) {
         this.altKey = altKey;

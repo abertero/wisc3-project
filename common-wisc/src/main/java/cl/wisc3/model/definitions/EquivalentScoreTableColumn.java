@@ -123,7 +123,7 @@ public class EquivalentScoreTableColumn extends BaseEntity {
     }
 
     public Map<Integer, Integer> getEquivalentScores() {
-        Map<Integer, Integer> result = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> result = new LinkedHashMap<Integer, Integer>();
         int i = 1;
         for (String elements : rowList) {
             if (StringUtils.isNotBlank(elements)) {

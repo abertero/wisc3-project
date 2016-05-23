@@ -5,21 +5,21 @@ import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.StandardToStringStyle;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class CrudEditRow {
     private static final String TEXTAREA_COLS = "cols";
     private static final String TEXTAREA_ROWS = "rows";
-    private static final String TEXTAREA_COLS_DEFAULT = "3";
-    private static final String TEXTAREA_ROWS_DEFAULT = "20";
+    private static final String TEXTAREA_COLS_DEFAULT = "20";
+    private static final String TEXTAREA_ROWS_DEFAULT = "3";
 
     private String name;
     private String displayName;
     private String value;
     private CrudEditType type;
-    private Map<String, String> mappedValues = new HashMap<>();
+    private Map<String, String> mappedValues = new LinkedHashMap<>();
     private List<String> listValues = new ArrayList<>();
 
     public CrudEditRow(CrudType type, String name, String value, CrudEditType editType) {
@@ -77,7 +77,7 @@ public class CrudEditRow {
                 builder.append(String.format("<input type='text' class='form-control' name='values[%s]' id='%s' value='%s'/>", name, name, value));
                 break;
             case TEXTAREA:
-                builder.append(String.format("<textarea class='form-control' name='values[%s]' id='%s' cols='%s' rows='%d'>%s</textarea>",
+                builder.append(String.format("<textarea class='form-control' name='values[%s]' id='%s' cols='%s' rows='%s'>%s</textarea>",
                         name,
                         name,
                         StringUtils.defaultIfEmpty(mappedValues.get(TEXTAREA_COLS), TEXTAREA_COLS_DEFAULT),

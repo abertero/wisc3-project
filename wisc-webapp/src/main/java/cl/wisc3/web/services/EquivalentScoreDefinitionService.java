@@ -8,7 +8,7 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,11 +17,11 @@ public class EquivalentScoreDefinitionService {
     private static final String SPLIT_KEY_VALUES = "#";
 
     public Map<String, Map<Integer, String>> getTableColumnsMapWithDefinitionKeyFromChildLevelKey(String childLevelAltKey) {
-        Map<String, Map<Integer, String>> result = new HashMap<>();
+        Map<String, Map<Integer, String>> result = new LinkedHashMap<>();
         List<EquivalentScoreTableColumn> listByChildLevel = EquivalentScoreTableColumn.findListByChildLevel(childLevelAltKey);
         for (EquivalentScoreTableColumn equivalentScoreTableColumn : listByChildLevel) {
             List<String> rowList = equivalentScoreTableColumn.getRowList();
-            Map<Integer, String> valuesByEquivalentScore = new HashMap<>();
+            Map<Integer, String> valuesByEquivalentScore = new LinkedHashMap<>();
             int i = 1;
             for (String value : rowList) {
                 valuesByEquivalentScore.put(i, value);
@@ -33,7 +33,7 @@ public class EquivalentScoreDefinitionService {
     }
 
     public boolean saveScore(ChildLevel childLevel, Map<String, String> values) {
-        Map<String, String[]> scoreByAltKey = new HashMap<>();
+        Map<String, String[]> scoreByAltKey = new LinkedHashMap<>();
         for (Map.Entry<String, String> valuesEntry : values.entrySet()) {
             String[] keyArray = valuesEntry.getKey().split(SPLIT_KEY_VALUES);
             int equivalentScore = NumberUtils.toInt(keyArray[0]);

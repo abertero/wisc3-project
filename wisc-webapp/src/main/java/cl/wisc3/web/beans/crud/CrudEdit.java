@@ -5,7 +5,7 @@ import org.apache.commons.lang.builder.StandardToStringStyle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +13,8 @@ public class CrudEdit implements Serializable {
 
     private String altKey;
     private CrudType type;
-    private Map<String, CrudEditRow> rows = new HashMap<>();
-    private Map<String, String> values = new HashMap<>();
+    private Map<String, CrudEditRow> rows = new LinkedHashMap<>();
+    private Map<String, String> values = new LinkedHashMap<>();
 
     public CrudEdit() {
     }

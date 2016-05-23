@@ -2,6 +2,7 @@ package cl.wisc3.web.services;
 
 import cl.wisc3.web.beans.crud.CrudEdit;
 import cl.wisc3.web.beans.crud.CrudType;
+import cl.wisc3.web.services.crud.CrudChildInfo;
 import cl.wisc3.web.services.crud.CrudChildLevel;
 import cl.wisc3.web.services.crud.CrudEvaluationDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ public class CrudEditGeneratorService {
     private CrudEvaluationDefinition crudEvaluationDefinition;
     @Autowired
     private CrudChildLevel crudChildLevel;
+    @Autowired
+    private CrudChildInfo crudChildInfo;
 
     public CrudEdit getCrudByType(CrudType type, String altKey) {
         switch (type) {
@@ -21,6 +24,8 @@ public class CrudEditGeneratorService {
                 return crudEvaluationDefinition.getCrudEdit(altKey);
             case CHILD_LEVEL:
                 return crudChildLevel.getCrudEdit(altKey);
+            case CHILD_INFO:
+                return crudChildInfo.getCrudEdit(altKey);
             default:
                 return new CrudEdit("", null);
         }
@@ -33,6 +38,9 @@ public class CrudEditGeneratorService {
                 break;
             case CHILD_LEVEL:
                 crudChildLevel.save(crud);
+                break;
+            case CHILD_INFO:
+                crudChildInfo.save(crud);
                 break;
         }
     }

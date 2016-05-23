@@ -1,7 +1,7 @@
 package cl.wisc3.web.beans.crud;
 
 public enum CrudType {
-    EVALUATION_DEFINITION("evaluacion", "crud.evaluacion.title"), CHILD_LEVEL("childlevel", "crud.childlevel.title");
+    EVALUATION_DEFINITION("evaluacion", "crud.evaluacion.title"), CHILD_LEVEL("childlevel", "crud.childlevel.title"), CHILD_INFO("childinfo", "crud.childinfo.title");
 
     private String name;
     private String title;

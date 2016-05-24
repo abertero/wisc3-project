@@ -62,6 +62,6 @@ public class EquivalentScoreController {
     public ModelAndView saveEquivalentScore(@PathVariable String childLevelAltKey, @RequestParam Map<String, String> values) {
         ChildLevel childLevel = childLevelService.getByAltKey(childLevelAltKey);
         equivalentScoreDefinitionService.saveScore(childLevel, values);
-        return new ModelAndView(String.format("redirect:/definition/score/equivalent/edit/%s", childLevelAltKey));
+        return new ModelAndView(String.format("redirect:/definition/score/equivalent/view/%s", childLevelAltKey));
     }
 }

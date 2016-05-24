@@ -39,8 +39,10 @@ public class ScaleController {
         }
         ModelAndView mv = new ModelAndView("scale-definition-edit");
         Map<Integer, ScaleDefinition> definitions = scaleDefinitionService.getFromScale(scale);
+        int averageScaleRange = (int) Math.ceil((scale.getMinRange() + scale.getMaxRange()) / 2);
         mv.addObject("scale", scale);
         mv.addObject("definitions", definitions);
+        mv.addObject("averageScaleRange", averageScaleRange);
         return mv;
     }
 
@@ -52,8 +54,10 @@ public class ScaleController {
         }
         ModelAndView mv = new ModelAndView("scale-definition-view");
         Map<Integer, ScaleDefinition> definitions = scaleDefinitionService.getFromScale(scale);
+        int averageScaleRange = (int) Math.ceil((scale.getMinRange() + scale.getMaxRange()) / 2);
         mv.addObject("scale", scale);
         mv.addObject("definitions", definitions);
+        mv.addObject("averageScaleRange", averageScaleRange);
         return mv;
     }
 

@@ -16,6 +16,8 @@
                 code="home.ref.cruds.childinfo"/></a></li>
         <li><a href="${ctx}/definition/score/equivalent/level"><spring:message
                 code="home.ref.equivalentScores.selectLevel"/></a></li>
+        <li><a href="${ctx}/scale/select"><spring:message
+                code="home.ref.scale.select"/></a></li>
     </ul>
 </div>
 

@@ -5,6 +5,8 @@
 
 <h1><spring:message code="scale.edit.title"/></h1>
 
+<p><spring:message code="scale.edit.message"/>&nbsp;<c:out value="${childLevel.displayName}"/></p>
+
 <form method="post" action="${ctx}/scale/view/${childLevel.altKey}">
     <div>
         <div class="col-md-6 col-xs-12">
@@ -21,20 +23,20 @@
                 <tbody>
                 <c:forEach begin="${scale.minRange}" end="${averageScaleRange}" var="i">
                     <tr>
-                        <td><input type="hidden" name="definitions[${i}].scaleScoreSum" value="${i}"/><c:out
+                        <td class="text-center"><input type="hidden" name="definitions[${i}].scaleScoreSum" value="${i}"/><c:out
                                 value="${i}"/></td>
-                        <td><input type="text" name="definitions[${i}].ci" class="input-field input-sm"
+                        <td class="text-center"><input type="text" name="definitions[${i}].ci" class="input-field input-sm"
                                    value="${definitions[i].ci}" size="4"/></td>
-                        <td><input type="text" name="definitions[${i}].rankPercentage" class="input-field input-sm"
+                        <td class="text-center"><input type="text" name="definitions[${i}].rankPercentage" class="input-field input-sm"
                                    value="${definitions[i].rankPercentage}" size="4"/></td>
-                        <td><input type="text" name="definitions[${i}].minConfidenceIntervalNinetyPercent"
+                        <td class="text-center"><input type="text" name="definitions[${i}].minConfidenceIntervalNinetyPercent"
                                    class="input-field input-sm"
                                    value="${definitions[i].minConfidenceIntervalNinetyPercent}"
                                    size="4"/>&nbsp;-&nbsp;<input
                                 type="text" name="definitions[${i}].maxConfidenceIntervalNinetyPercent"
                                 class="input-field input-sm"
                                 value="${definitions[i].minConfidenceIntervalNinetyFivePercent}" size="4"/></td>
-                        <td><input type="text" name="definitions[${i}].minConfidenceIntervalNinetyFivePercent"
+                        <td class="text-center"><input type="text" name="definitions[${i}].minConfidenceIntervalNinetyFivePercent"
                                    class="input-field input-sm"
                                    value="${definitions[i].minConfidenceIntervalNinetyPercent}"
                                    size="4"/>&nbsp;-&nbsp;<input
@@ -60,20 +62,20 @@
                 <tbody>
                 <c:forEach begin="${averageScaleRange+1}" end="${scale.maxRange}" var="i">
                     <tr>
-                        <td><input type="hidden" name="definitions[${i}].scaleScoreSum" value="${i}"/><c:out
+                        <td class="text-center"><input type="hidden" name="definitions[${i}].scaleScoreSum" value="${i}"/><c:out
                                 value="${i}"/></td>
-                        <td><input type="text" name="definitions[${i}].ci" class="input-field input-sm"
+                        <td class="text-center"><input type="text" name="definitions[${i}].ci" class="input-field input-sm"
                                    value="${definitions[i].ci}" size="4"/></td>
-                        <td><input type="text" name="definitions[${i}].rankPercentage" class="input-field input-sm"
+                        <td class="text-center"><input type="text" name="definitions[${i}].rankPercentage" class="input-field input-sm"
                                    value="${definitions[i].rankPercentage}" size="4"/></td>
-                        <td><input type="text" name="definitions[${i}].minConfidenceIntervalNinetyPercent"
+                        <td class="text-center"><input type="text" name="definitions[${i}].minConfidenceIntervalNinetyPercent"
                                    class="input-field input-sm"
                                    value="${definitions[i].minConfidenceIntervalNinetyPercent}"
                                    size="4"/>&nbsp;-&nbsp;<input
                                 type="text" name="definitions[${i}].maxConfidenceIntervalNinetyPercent"
                                 class="input-field input-sm"
                                 value="${definitions[i].minConfidenceIntervalNinetyFivePercent}" size="4"/></td>
-                        <td><input type="text" name="definitions[${i}].minConfidenceIntervalNinetyFivePercent"
+                        <td class="text-center"><input type="text" name="definitions[${i}].minConfidenceIntervalNinetyFivePercent"
                                    class="input-field input-sm"
                                    value="${definitions[i].minConfidenceIntervalNinetyPercent}"
                                    size="4"/>&nbsp;-&nbsp;<input

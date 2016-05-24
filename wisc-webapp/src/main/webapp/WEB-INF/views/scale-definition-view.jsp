@@ -5,6 +5,8 @@
 
 <h1><spring:message code="scale.edit.title"/></h1>
 
+<p><spring:message code="scale.edit.message"/>&nbsp;<c:out value="${childLevel.displayName}"/></p>
+
 <div>
     <div class="col-md-6 col-xs-12">
         <table class="table table-bordered table-condensed table-extra-small">
@@ -20,12 +22,12 @@
             <tbody>
             <c:forEach begin="${scale.minRange}" end="${averageScaleRange}" var="i">
                 <tr>
-                    <td><c:out value="${i}"/></td>
-                    <td><c:out value="${definitions[i].ci}"/></td>
-                    <td><c:out value="${definitions[i].rankPercentage}"/></td>
-                    <td><c:out value="${definitions[i].minConfidenceIntervalNinetyPercent}"/>&nbsp;-&nbsp;<c:out
+                    <td class="text-center"><c:out value="${i}"/></td>
+                    <td class="text-center"><c:out value="${definitions[i].ci}"/></td>
+                    <td class="text-center"><c:out value="${definitions[i].rankPercentage}"/></td>
+                    <td class="text-center"><c:out value="${definitions[i].minConfidenceIntervalNinetyPercent}"/>&nbsp;-&nbsp;<c:out
                             value="${definitions[i].minConfidenceIntervalNinetyFivePercent}"/></td>
-                    <td><c:out value="${definitions[i].minConfidenceIntervalNinetyPercent}"/>&nbsp;-&nbsp;<c:out
+                    <td class="text-center"><c:out value="${definitions[i].minConfidenceIntervalNinetyPercent}"/>&nbsp;-&nbsp;<c:out
                             value="${definitions[i].maxConfidenceIntervalNinetyFivePercent}"/></td>
                 </tr>
             </c:forEach>
@@ -46,12 +48,12 @@
             <tbody>
             <c:forEach begin="${averageScaleRange+1}" end="${scale.maxRange}" var="i">
                 <tr>
-                    <td><c:out value="${i}"/></td>
-                    <td><c:out value="${definitions[i].ci}"/></td>
-                    <td><c:out value="${definitions[i].rankPercentage}"/></td>
-                    <td><c:out value="${definitions[i].minConfidenceIntervalNinetyPercent}"/>&nbsp;-&nbsp;<c:out
+                    <td class="text-center"><c:out value="${i}"/></td>
+                    <td class="text-center"><c:out value="${definitions[i].ci}"/></td>
+                    <td class="text-center"><c:out value="${definitions[i].rankPercentage}"/></td>
+                    <td class="text-center"><c:out value="${definitions[i].minConfidenceIntervalNinetyPercent}"/>&nbsp;-&nbsp;<c:out
                             value="${definitions[i].minConfidenceIntervalNinetyFivePercent}"/></td>
-                    <td><c:out value="${definitions[i].minConfidenceIntervalNinetyPercent}"/>&nbsp;-&nbsp;<c:out
+                    <td class="text-center"><c:out value="${definitions[i].minConfidenceIntervalNinetyPercent}"/>&nbsp;-&nbsp;<c:out
                             value="${definitions[i].maxConfidenceIntervalNinetyFivePercent}"/></td>
                 </tr>
             </c:forEach>

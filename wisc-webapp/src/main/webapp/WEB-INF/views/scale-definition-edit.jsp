@@ -5,9 +5,9 @@
 
 <h1><spring:message code="scale.edit.title"/></h1>
 
-<p><spring:message code="scale.edit.message"/>&nbsp;<c:out value="${childLevel.displayName}"/></p>
+<p><spring:message code="scale.edit.message"/>&nbsp;<c:out value="${scale.displayName}"/></p>
 
-<form method="post" action="${ctx}/scale/view/${childLevel.altKey}">
+<form method="post" action="${ctx}/scale/save/${scale.code}">
     <div>
         <div class="col-md-6 col-xs-12">
             <table class="table table-bordered table-condensed table-extra-small">

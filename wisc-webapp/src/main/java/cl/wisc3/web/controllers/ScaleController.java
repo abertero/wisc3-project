@@ -1,7 +1,6 @@
 package cl.wisc3.web.controllers;
 
 import cl.wisc3.enums.Scale;
-import cl.wisc3.model.child.ChildLevel;
 import cl.wisc3.model.definitions.ScaleDefinition;
 import cl.wisc3.web.services.ScaleDefinitionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +62,7 @@ public class ScaleController {
 
     @RequestMapping(value = "save/{scaleStr}", method = RequestMethod.POST)
     @Transactional
-    public ModelAndView saveEquivalentScore(@PathVariable String scaleStr, @RequestParam List<ScaleDefinition> definitions) {
+    public ModelAndView save(@PathVariable String scaleStr, @RequestParam List<ScaleDefinition> definitions) {
         return new ModelAndView(String.format("redirect:/scale/view/%s", scaleStr));
     }
 }

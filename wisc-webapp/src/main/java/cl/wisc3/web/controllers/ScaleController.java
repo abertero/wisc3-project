@@ -34,7 +34,7 @@ public class ScaleController {
     public ModelAndView edit(@PathVariable String scaleStr) {
         Scale scale = Scale.fromCode(scaleStr);
         if (scale == null) {
-            return new ModelAndView("redirect:/scale/type");
+            return new ModelAndView("redirect:/scale/select");
         }
         ModelAndView mv = new ModelAndView("scale-definition-edit");
         Map<Integer, ScaleDefinition> definitions = scaleDefinitionService.getFromScale(scale);
@@ -49,7 +49,7 @@ public class ScaleController {
     public ModelAndView view(@PathVariable String scaleStr) {
         Scale scale = Scale.fromCode(scaleStr);
         if (scale == null) {
-            return new ModelAndView("redirect:/scale/type");
+            return new ModelAndView("redirect:/scale/select");
         }
         ModelAndView mv = new ModelAndView("scale-definition-view");
         Map<Integer, ScaleDefinition> definitions = scaleDefinitionService.getFromScale(scale);
@@ -62,7 +62,7 @@ public class ScaleController {
 
     @RequestMapping(value = "save/{scaleStr}", method = RequestMethod.POST)
     @Transactional
-    public ModelAndView save(@PathVariable String scaleStr, @RequestParam List<ScaleDefinition> definitions) {
+    public ModelAndView save(@PathVariable String scaleStr, @RequestParam(required = false) List<ScaleDefinition> definitions) {
         return new ModelAndView(String.format("redirect:/scale/view/%s", scaleStr));
     }
 }

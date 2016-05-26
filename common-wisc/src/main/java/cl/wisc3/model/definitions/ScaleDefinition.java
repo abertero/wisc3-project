@@ -13,13 +13,13 @@ import java.util.List;
 public class ScaleDefinition extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Scale scale;
-    private int scaleScoreSum;
-    private int ci;
-    private double rankPercentage;
-    private int minConfidenceIntervalNinetyPercent;
-    private int maxConfidenceIntervalNinetyPercent;
-    private int minConfidenceIntervalNinetyFivePercent;
-    private int maxConfidenceIntervalNinetyFivePercent;
+    private Integer scaleScoreSum;
+    private Integer ci;
+    private Double rankPercentage;
+    private Integer minConfidenceIntervalNinetyPercent;
+    private Integer maxConfidenceIntervalNinetyPercent;
+    private Integer minConfidenceIntervalNinetyFivePercent;
+    private Integer maxConfidenceIntervalNinetyFivePercent;
 
     public Scale getScale() {
         return scale;
@@ -29,59 +29,59 @@ public class ScaleDefinition extends BaseEntity {
         this.scale = scale;
     }
 
-    public int getScaleScoreSum() {
+    public Integer getScaleScoreSum() {
         return scaleScoreSum;
     }
 
-    public void setScaleScoreSum(int scaleScoreSum) {
+    public void setScaleScoreSum(Integer scaleScoreSum) {
         this.scaleScoreSum = scaleScoreSum;
     }
 
-    public int getCi() {
+    public Integer getCi() {
         return ci;
     }
 
-    public void setCi(int ci) {
+    public void setCi(Integer ci) {
         this.ci = ci;
     }
 
-    public double getRankPercentage() {
+    public Double getRankPercentage() {
         return rankPercentage;
     }
 
-    public void setRankPercentage(double rankPercentage) {
+    public void setRankPercentage(Double rankPercentage) {
         this.rankPercentage = rankPercentage;
     }
 
-    public int getMinConfidenceIntervalNinetyPercent() {
+    public Integer getMinConfidenceIntervalNinetyPercent() {
         return minConfidenceIntervalNinetyPercent;
     }
 
-    public void setMinConfidenceIntervalNinetyPercent(int minConfidenceIntervalNinetyPercent) {
+    public void setMinConfidenceIntervalNinetyPercent(Integer minConfidenceIntervalNinetyPercent) {
         this.minConfidenceIntervalNinetyPercent = minConfidenceIntervalNinetyPercent;
     }
 
-    public int getMaxConfidenceIntervalNinetyPercent() {
+    public Integer getMaxConfidenceIntervalNinetyPercent() {
         return maxConfidenceIntervalNinetyPercent;
     }
 
-    public void setMaxConfidenceIntervalNinetyPercent(int maxConfidenceIntervalNinetyPercent) {
+    public void setMaxConfidenceIntervalNinetyPercent(Integer maxConfidenceIntervalNinetyPercent) {
         this.maxConfidenceIntervalNinetyPercent = maxConfidenceIntervalNinetyPercent;
     }
 
-    public int getMinConfidenceIntervalNinetyFivePercent() {
+    public Integer getMinConfidenceIntervalNinetyFivePercent() {
         return minConfidenceIntervalNinetyFivePercent;
     }
 
-    public void setMinConfidenceIntervalNinetyFivePercent(int minConfidenceIntervalNinetyFivePercent) {
+    public void setMinConfidenceIntervalNinetyFivePercent(Integer minConfidenceIntervalNinetyFivePercent) {
         this.minConfidenceIntervalNinetyFivePercent = minConfidenceIntervalNinetyFivePercent;
     }
 
-    public int getMaxConfidenceIntervalNinetyFivePercent() {
+    public Integer getMaxConfidenceIntervalNinetyFivePercent() {
         return maxConfidenceIntervalNinetyFivePercent;
     }
 
-    public void setMaxConfidenceIntervalNinetyFivePercent(int maxConfidenceIntervalNinetyFivePercent) {
+    public void setMaxConfidenceIntervalNinetyFivePercent(Integer maxConfidenceIntervalNinetyFivePercent) {
         this.maxConfidenceIntervalNinetyFivePercent = maxConfidenceIntervalNinetyFivePercent;
     }
 

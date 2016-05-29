@@ -85,6 +85,15 @@ public class ScaleDefinition extends BaseEntity {
         this.maxConfidenceIntervalNinetyFivePercent = maxConfidenceIntervalNinetyFivePercent;
     }
 
+    public void loadFromScaleDefinition(ScaleDefinition scaleDefinition) {
+        this.ci = scaleDefinition.getCi();
+        this.rankPercentage = scaleDefinition.getRankPercentage();
+        this.minConfidenceIntervalNinetyPercent = scaleDefinition.getMinConfidenceIntervalNinetyPercent();
+        this.maxConfidenceIntervalNinetyPercent = scaleDefinition.getMaxConfidenceIntervalNinetyPercent();
+        this.minConfidenceIntervalNinetyFivePercent = scaleDefinition.getMinConfidenceIntervalNinetyFivePercent();
+        this.maxConfidenceIntervalNinetyFivePercent = scaleDefinition.getMaxConfidenceIntervalNinetyFivePercent();
+    }
+
     public static List<ScaleDefinition> findByScale(Scale scale) {
         return JPA.query("SELECT s FROM ScaleDefinition s WHERE s.scale = ?1 ORDER BY s.scaleScoreSum", scale);
     }

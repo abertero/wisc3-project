@@ -63,6 +63,11 @@ public class ScaleController {
     @RequestMapping(value = "save/{scaleStr}", method = RequestMethod.POST)
     @Transactional
     public ModelAndView save(@PathVariable String scaleStr, @ModelAttribute ScaleDefinitionWrapper wrapper) {
+        Scale scale = Scale.fromCode(scaleStr);
+        if (scale == null) {
+            return new ModelAndView("redirect:/scale/select");
+        }
+        scaleDefinitionService.saveScaleDefinitions(scale, wrapper);
         return new ModelAndView(String.format("redirect:/scale/view/%s", scaleStr));
     }
 }

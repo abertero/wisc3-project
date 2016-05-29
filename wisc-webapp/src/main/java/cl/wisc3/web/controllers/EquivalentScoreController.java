@@ -37,23 +37,33 @@ public class EquivalentScoreController {
     @RequestMapping(value = "equivalent/edit/{childLevelAltKey}", method = RequestMethod.GET)
     public ModelAndView editEquivalentScore(@PathVariable String childLevelAltKey) {
         ModelAndView mv = new ModelAndView("equivalent-score-edit");
-        mv.addObject("childLevel", childLevelService.getByAltKey(childLevelAltKey));
-        mv.addObject("tableColumnsByDefinition", equivalentScoreDefinitionService.getTableColumnsMapWithDefinitionKeyFromChildLevelKey(childLevelAltKey));
-        mv.addObject("executionDefinitions", evaluationDefinitionService.findByEvaluationType(EvaluationType.EXECUTION));
-        mv.addObject("verbalDefinitions", evaluationDefinitionService.findByEvaluationType(EvaluationType.VERBAL));
-        mv.addObject("maxEquivalentScore", EquivalentScoreDefinition.MAX_EQUIVALENT_SCORE);
-        return mv;
+        ChildLevel level = childLevelService.getByAltKey(childLevelAltKey);
+        if (level != null) {
+            mv.addObject("childLevel", level);
+            mv.addObject("tableColumnsByDefinition", equivalentScoreDefinitionService.getTableColumnsMapWithDefinitionKeyFromChildLevelKey(childLevelAltKey));
+            mv.addObject("executionDefinitions", evaluationDefinitionService.findByEvaluationType(EvaluationType.EXECUTION));
+            mv.addObject("verbalDefinitions", evaluationDefinitionService.findByEvaluationType(EvaluationType.VERBAL));
+            mv.addObject("maxEquivalentScore", EquivalentScoreDefinition.MAX_EQUIVALENT_SCORE);
+            return mv;
+        } else {
+            return new ModelAndView("redirect:/definition/score/equivalent/level");
+        }
     }
 
     @RequestMapping(value = "equivalent/view/{childLevelAltKey}", method = RequestMethod.GET)
     public ModelAndView viewEquivalentScore(@PathVariable String childLevelAltKey) {
         ModelAndView mv = new ModelAndView("equivalent-score-view");
-        mv.addObject("childLevel", childLevelService.getByAltKey(childLevelAltKey));
-        mv.addObject("tableColumnsByDefinition", equivalentScoreDefinitionService.getTableColumnsMapWithDefinitionKeyFromChildLevelKey(childLevelAltKey));
-        mv.addObject("executionDefinitions", evaluationDefinitionService.findByEvaluationType(EvaluationType.EXECUTION));
-        mv.addObject("verbalDefinitions", evaluationDefinitionService.findByEvaluationType(EvaluationType.VERBAL));
-        mv.addObject("maxEquivalentScore", EquivalentScoreDefinition.MAX_EQUIVALENT_SCORE);
-        return mv;
+        ChildLevel level = childLevelService.getByAltKey(childLevelAltKey);
+        if (level != null) {
+            mv.addObject("childLevel", level);
+            mv.addObject("tableColumnsByDefinition", equivalentScoreDefinitionService.getTableColumnsMapWithDefinitionKeyFromChildLevelKey(childLevelAltKey));
+            mv.addObject("executionDefinitions", evaluationDefinitionService.findByEvaluationType(EvaluationType.EXECUTION));
+            mv.addObject("verbalDefinitions", evaluationDefinitionService.findByEvaluationType(EvaluationType.VERBAL));
+            mv.addObject("maxEquivalentScore", EquivalentScoreDefinition.MAX_EQUIVALENT_SCORE);
+            return mv;
+        } else {
+            return new ModelAndView("redirect:/definition/score/equivalent/level");
+        }
     }
 
 
@@ -61,7 +71,11 @@ public class EquivalentScoreController {
     @Transactional
     public ModelAndView saveEquivalentScore(@PathVariable String childLevelAltKey, @RequestParam Map<String, String> values) {
         ChildLevel childLevel = childLevelService.getByAltKey(childLevelAltKey);
-        equivalentScoreDefinitionService.saveScore(childLevel, values);
-        return new ModelAndView(String.format("redirect:/definition/score/equivalent/view/%s", childLevelAltKey));
+        if (childLevel != null) {
+            equivalentScoreDefinitionService.saveScore(childLevel, values);
+            return new ModelAndView(String.format("redirect:/definition/score/equivalent/view/%s", childLevelAltKey));
+        } else {
+            return new ModelAndView("redirect:/definition/score/equivalent/level");
+        }
     }
 }

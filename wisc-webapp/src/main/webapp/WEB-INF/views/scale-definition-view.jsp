@@ -59,9 +59,6 @@
             </c:forEach>
             </tbody>
         </table>
-
-        <button class="btn btn-default" type="button" onclick="location.href='${ctx}/scale/select'"><spring:message
-                code="scale.back"/></button>
     </div>
 
     <button class="btn btn-default" type="button" onclick="location.href='${ctx}/scale/select'"><spring:message

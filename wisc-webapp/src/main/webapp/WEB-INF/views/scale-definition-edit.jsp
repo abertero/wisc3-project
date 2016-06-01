@@ -35,10 +35,10 @@
                                    size="4"/>&nbsp;-&nbsp;<input
                                 type="text" name="definitions[${i}].maxConfidenceIntervalNinetyPercent"
                                 class="input-field input-sm"
-                                value="${definitions[i].minConfidenceIntervalNinetyFivePercent}" size="4"/></td>
+                                value="${definitions[i].maxConfidenceIntervalNinetyPercent}" size="4"/></td>
                         <td class="text-center"><input type="text" name="definitions[${i}].minConfidenceIntervalNinetyFivePercent"
                                    class="input-field input-sm"
-                                   value="${definitions[i].minConfidenceIntervalNinetyPercent}"
+                                   value="${definitions[i].minConfidenceIntervalNinetyFivePercent}"
                                    size="4"/>&nbsp;-&nbsp;<input
                                 type="text" name="definitions[${i}].maxConfidenceIntervalNinetyFivePercent"
                                 class="input-field input-sm"

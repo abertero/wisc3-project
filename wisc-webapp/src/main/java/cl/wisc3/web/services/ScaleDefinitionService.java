@@ -33,9 +33,16 @@ public class ScaleDefinitionService {
         } else {
             for (ScaleDefinition scaleDefinition : wrapper.getDefinitions()) {
                 ScaleDefinition fromDb = definitionsMap.get(scaleDefinition.getScaleScoreSum());
-                fromDb.loadFromScaleDefinition(scaleDefinition);
-                if (!scaleDefinition.save()) {
-                    return false;
+                if (fromDb != null) {
+                    fromDb.loadFromScaleDefinition(scaleDefinition);
+                    if (!fromDb.save()) {
+                        return false;
+                    }
+                } else {
+                    scaleDefinition.setScale(scale);
+                    if (!scaleDefinition.save()) {
+                        return false;
+                    }
                 }
             }
         }

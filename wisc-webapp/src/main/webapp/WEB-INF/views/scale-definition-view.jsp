@@ -26,8 +26,8 @@
                     <td class="text-center"><c:out value="${definitions[i].ci}"/></td>
                     <td class="text-center"><c:out value="${definitions[i].rankPercentage}"/></td>
                     <td class="text-center"><c:out value="${definitions[i].minConfidenceIntervalNinetyPercent}"/>&nbsp;-&nbsp;<c:out
-                            value="${definitions[i].minConfidenceIntervalNinetyFivePercent}"/></td>
-                    <td class="text-center"><c:out value="${definitions[i].minConfidenceIntervalNinetyPercent}"/>&nbsp;-&nbsp;<c:out
+                            value="${definitions[i].maxConfidenceIntervalNinetyPercent}"/></td>
+                    <td class="text-center"><c:out value="${definitions[i].minConfidenceIntervalNinetyFivePercent}"/>&nbsp;-&nbsp;<c:out
                             value="${definitions[i].maxConfidenceIntervalNinetyFivePercent}"/></td>
                 </tr>
             </c:forEach>

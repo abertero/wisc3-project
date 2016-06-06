@@ -14,6 +14,7 @@ public class ChildEvaluationScore extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     private EvaluationDefinition definition;
     private int score;
+    private int realScore;
 
     public ChildEvaluation getEvaluation() {
         return evaluation;
@@ -37,5 +38,13 @@ public class ChildEvaluationScore extends BaseEntity {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public int getRealScore() {
+        return realScore;
+    }
+
+    public void setRealScore(int realScore) {
+        this.realScore = realScore;
     }
 }

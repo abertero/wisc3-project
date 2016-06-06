@@ -18,6 +18,8 @@
                 code="home.ref.equivalentScores.selectLevel"/></a></li>
         <li><a href="${ctx}/scale/select"><spring:message
                 code="home.ref.scale.select"/></a></li>
+        <li><a href="${ctx}/evaluation/list"><spring:message
+                code="home.ref.evaluation.list"/></a></li>
     </ul>
 </div>
 

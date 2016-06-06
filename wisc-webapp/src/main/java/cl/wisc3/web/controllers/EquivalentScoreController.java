@@ -3,7 +3,7 @@ package cl.wisc3.web.controllers;
 import cl.wisc3.enums.EvaluationType;
 import cl.wisc3.model.child.ChildLevel;
 import cl.wisc3.model.definitions.EquivalentScoreDefinition;
-import cl.wisc3.web.services.ChildLevelService;
+import cl.wisc3.web.services.ChildService;
 import cl.wisc3.web.services.EquivalentScoreDefinitionService;
 import cl.wisc3.web.services.EvaluationDefinitionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.Map;
 @RequestMapping("/definition/score/*")
 public class EquivalentScoreController {
     @Autowired
-    private ChildLevelService childLevelService;
+    private ChildService childService;
     @Autowired
     private EvaluationDefinitionService evaluationDefinitionService;
     @Autowired
@@ -30,14 +30,14 @@ public class EquivalentScoreController {
     @RequestMapping(value = "equivalent/level", method = RequestMethod.GET)
     public ModelAndView selectLevel() {
         ModelAndView mv = new ModelAndView("equivalent-score-select-level");
-        mv.addObject("levels", childLevelService.getAll());
+        mv.addObject("levels", childService.getAllLevels());
         return mv;
     }
 
     @RequestMapping(value = "equivalent/edit/{childLevelAltKey}", method = RequestMethod.GET)
     public ModelAndView editEquivalentScore(@PathVariable String childLevelAltKey) {
         ModelAndView mv = new ModelAndView("equivalent-score-edit");
-        ChildLevel level = childLevelService.getByAltKey(childLevelAltKey);
+        ChildLevel level = childService.getLevelByAltKey(childLevelAltKey);
         if (level != null) {
             mv.addObject("childLevel", level);
             mv.addObject("tableColumnsByDefinition", equivalentScoreDefinitionService.getTableColumnsMapWithDefinitionKeyFromChildLevelKey(childLevelAltKey));
@@ -53,7 +53,7 @@ public class EquivalentScoreController {
     @RequestMapping(value = "equivalent/view/{childLevelAltKey}", method = RequestMethod.GET)
     public ModelAndView viewEquivalentScore(@PathVariable String childLevelAltKey) {
         ModelAndView mv = new ModelAndView("equivalent-score-view");
-        ChildLevel level = childLevelService.getByAltKey(childLevelAltKey);
+        ChildLevel level = childService.getLevelByAltKey(childLevelAltKey);
         if (level != null) {
             mv.addObject("childLevel", level);
             mv.addObject("tableColumnsByDefinition", equivalentScoreDefinitionService.getTableColumnsMapWithDefinitionKeyFromChildLevelKey(childLevelAltKey));
@@ -70,7 +70,7 @@ public class EquivalentScoreController {
     @RequestMapping(value = "equivalent/save/{childLevelAltKey}", method = RequestMethod.POST)
     @Transactional
     public ModelAndView saveEquivalentScore(@PathVariable String childLevelAltKey, @RequestParam Map<String, String> values) {
-        ChildLevel childLevel = childLevelService.getByAltKey(childLevelAltKey);
+        ChildLevel childLevel = childService.getLevelByAltKey(childLevelAltKey);
         if (childLevel != null) {
             equivalentScoreDefinitionService.saveScore(childLevel, values);
             return new ModelAndView(String.format("redirect:/definition/score/equivalent/view/%s", childLevelAltKey));

@@ -1,10 +1,13 @@
 package cl.wisc3.model.child;
 
+import cl.wisc3.beans.AgeDetails;
+import cl.wisc3.calculators.AgeCalculator;
 import cl.wisc3.config.JPA;
 import cl.wisc3.model.base.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Lob;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -82,6 +85,21 @@ public class ChildInfo extends BaseEntity {
 
     public void setBirthYear(int birthYear) {
         this.birthYear = birthYear;
+    }
+
+    public String getDisplayName() {
+        return String.format("%s %s", firstName, lastName);
+    }
+
+    public AgeDetails getBirthDetail() {
+        return new AgeDetails(birthDay, birthMonth, birthYear);
+    }
+
+    public AgeDetails getDisplayAge() {
+        AgeDetails response = AgeCalculator.INSTANCE.calculate(
+                new AgeDetails(new Date()), getBirthDetail()
+        );
+        return response;
     }
 
     public static ChildInfo findByAltKey(String altKey) {

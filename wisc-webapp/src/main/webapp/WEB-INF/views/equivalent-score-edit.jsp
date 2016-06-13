@@ -29,7 +29,7 @@
                 <tr>
                     <td class="text-center"><span class="span-bold"><c:out value="${i}"/></span></td>
                     <c:forEach items="${verbalDefinitions}" var="definition">
-                        <td class="td-center cell_${definition.altKey}"><input type="text"
+                        <td class="td-center cell_${definition.altKey}"><input type="number"
                                                                                name="${i}#${definition.altKey}"
                                                                                class="input-field input-sm"
                                                                                data-alt-key="${definition.altKey}"
@@ -64,7 +64,7 @@
                 <tr>
                     <td class="text-center"><span class="span-bold"><c:out value="${i}"/></span></td>
                     <c:forEach items="${executionDefinitions}" var="definition">
-                        <td class="td-center cell_${definition.altKey}"><input type="text"
+                        <td class="td-center cell_${definition.altKey}"><input type="number"
                                                                                name="${i}#${definition.altKey}"
                                                                                class="input-field input-sm"
                                                                                data-alt-key="${definition.altKey}"

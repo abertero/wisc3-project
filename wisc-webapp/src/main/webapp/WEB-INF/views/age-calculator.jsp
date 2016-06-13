@@ -19,15 +19,15 @@
 
                 <div class="input-group col-xs-12 col-sm-8">
                     <div class="col-xs-2">
-                        <input type="text" class="form-control"
+                        <input type="number" class="form-control"
                                placeholder="<spring:message code="ageCalculator.year.placeholder"/>" name="testYear"
                                value="${helper.testYear}"/></div>
                     <div class="col-xs-1">
-                        <input type="text" class="form-control"
+                        <input type="number" class="form-control"
                                placeholder="<spring:message code="ageCalculator.month.placeholder"/>" name="testMonth"
                                value="${helper.testMonth}"/></div>
                     <div class="col-xs-1">
-                        <input type="text" class="form-control"
+                        <input type="number" class="form-control"
                                placeholder="<spring:message code="ageCalculator.day.placeholder"/>" name="testDay"
                                value="${helper.testDay}"/></div>
                 </div>
@@ -38,15 +38,15 @@
 
                 <div class="input-group col-xs-12 col-sm-8">
                     <div class="col-xs-2">
-                        <input type="text" class="form-control"
+                        <input type="number" class="form-control"
                                placeholder="<spring:message code="ageCalculator.year.placeholder"/>" name="birthYear"
                                value="${helper.birthYear}"/></div>
                     <div class="col-xs-1">
-                        <input type="text" class="form-control"
+                        <input type="number" class="form-control"
                                placeholder="<spring:message code="ageCalculator.month.placeholder"/>" name="birthMonth"
                                value="${helper.birthMonth}"/></div>
                     <div class="col-xs-1">
-                        <input type="text" class="form-control"
+                        <input type="number" class="form-control"
                                placeholder="<spring:message code="ageCalculator.day.placeholder"/>" name="birthDay"
                                value="${helper.birthDay}"/></div>
                 </div>

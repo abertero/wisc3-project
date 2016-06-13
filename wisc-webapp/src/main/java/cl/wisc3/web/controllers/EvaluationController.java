@@ -1,17 +1,22 @@
 package cl.wisc3.web.controllers;
 
+import cl.wisc3.enums.EvaluationType;
 import cl.wisc3.model.child.ChildEvaluation;
 import cl.wisc3.model.child.ChildInfo;
+import cl.wisc3.model.definitions.EvaluationDefinition;
 import cl.wisc3.web.beans.crud.CrudType;
 import cl.wisc3.web.services.ChildService;
+import cl.wisc3.web.services.EvaluationDefinitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/evaluation/*")
@@ -19,6 +24,8 @@ public class EvaluationController {
 
     @Autowired
     private ChildService childService;
+    @Autowired
+    private EvaluationDefinitionService evaluationDefinitionService;
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public ModelAndView listChildren() {
@@ -40,4 +47,19 @@ public class EvaluationController {
         return mv;
     }
 
+    @RequestMapping(value = "new/{altKey}", method = RequestMethod.GET)
+    public ModelAndView newEvaluation(@PathVariable String altKey) {
+        ChildInfo child = childService.getChildByAltKey(altKey);
+        List<EvaluationDefinition> definitions = evaluationDefinitionService.findByEvaluationType(EvaluationType.VERBAL);
+        definitions.addAll(evaluationDefinitionService.findByEvaluationType(EvaluationType.EXECUTION));
+        ModelAndView mv = new ModelAndView("evaluation-edit");
+        mv.addObject("child", child);
+        mv.addObject("definitions", definitions);
+        return mv;
+    }
+
+    @RequestMapping(value = "save/${altKey}", method = RequestMethod.POST)
+    public ModelAndView saveEvaluation(@PathVariable String altKey, @RequestParam Map<String, String> definitionValues) {
+        return new ModelAndView(String.format("redirect:/evaluation/child/%s", altKey));
+    }
 }

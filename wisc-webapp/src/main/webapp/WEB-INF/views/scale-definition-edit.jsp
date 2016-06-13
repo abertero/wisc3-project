@@ -25,22 +25,22 @@
                     <tr>
                         <td class="text-center"><input type="hidden" name="definitions[${i}].scaleScoreSum" value="${i}"/><c:out
                                 value="${i}"/></td>
-                        <td class="text-center"><input type="text" name="definitions[${i}].ci" class="input-field input-sm"
+                        <td class="text-center"><input type="number" name="definitions[${i}].ci" class="input-field input-sm"
                                    value="${definitions[i].ci}" size="4"/></td>
-                        <td class="text-center"><input type="text" name="definitions[${i}].rankPercentage" class="input-field input-sm"
+                        <td class="text-center"><input type="number" name="definitions[${i}].rankPercentage" class="input-field input-sm"
                                    value="${definitions[i].rankPercentage}" size="4"/></td>
-                        <td class="text-center"><input type="text" name="definitions[${i}].minConfidenceIntervalNinetyPercent"
+                        <td class="text-center"><input type="number" name="definitions[${i}].minConfidenceIntervalNinetyPercent"
                                    class="input-field input-sm"
                                    value="${definitions[i].minConfidenceIntervalNinetyPercent}"
                                    size="4"/>&nbsp;-&nbsp;<input
-                                type="text" name="definitions[${i}].maxConfidenceIntervalNinetyPercent"
+                                type="number" name="definitions[${i}].maxConfidenceIntervalNinetyPercent"
                                 class="input-field input-sm"
                                 value="${definitions[i].maxConfidenceIntervalNinetyPercent}" size="4"/></td>
-                        <td class="text-center"><input type="text" name="definitions[${i}].minConfidenceIntervalNinetyFivePercent"
+                        <td class="text-center"><input type="number" name="definitions[${i}].minConfidenceIntervalNinetyFivePercent"
                                    class="input-field input-sm"
                                    value="${definitions[i].minConfidenceIntervalNinetyFivePercent}"
                                    size="4"/>&nbsp;-&nbsp;<input
-                                type="text" name="definitions[${i}].maxConfidenceIntervalNinetyFivePercent"
+                                type="number" name="definitions[${i}].maxConfidenceIntervalNinetyFivePercent"
                                 class="input-field input-sm"
                                 value="${definitions[i].maxConfidenceIntervalNinetyFivePercent}" size="4"/></td>
                     </tr>
@@ -64,22 +64,22 @@
                     <tr>
                         <td class="text-center"><input type="hidden" name="definitions[${i}].scaleScoreSum" value="${i}"/><c:out
                                 value="${i}"/></td>
-                        <td class="text-center"><input type="text" name="definitions[${i}].ci" class="input-field input-sm"
+                        <td class="text-center"><input type="number" name="definitions[${i}].ci" class="input-field input-sm"
                                    value="${definitions[i].ci}" size="4"/></td>
-                        <td class="text-center"><input type="text" name="definitions[${i}].rankPercentage" class="input-field input-sm"
+                        <td class="text-center"><input type="number" name="definitions[${i}].rankPercentage" class="input-field input-sm"
                                    value="${definitions[i].rankPercentage}" size="4"/></td>
-                        <td class="text-center"><input type="text" name="definitions[${i}].minConfidenceIntervalNinetyPercent"
+                        <td class="text-center"><input type="number" name="definitions[${i}].minConfidenceIntervalNinetyPercent"
                                    class="input-field input-sm"
                                    value="${definitions[i].minConfidenceIntervalNinetyPercent}"
                                    size="4"/>&nbsp;-&nbsp;<input
-                                type="text" name="definitions[${i}].maxConfidenceIntervalNinetyPercent"
+                                type="number" name="definitions[${i}].maxConfidenceIntervalNinetyPercent"
                                 class="input-field input-sm"
                                 value="${definitions[i].maxConfidenceIntervalNinetyPercent}" size="4"/></td>
-                        <td class="text-center"><input type="text" name="definitions[${i}].minConfidenceIntervalNinetyFivePercent"
+                        <td class="text-center"><input type="number" name="definitions[${i}].minConfidenceIntervalNinetyFivePercent"
                                    class="input-field input-sm"
                                    value="${definitions[i].minConfidenceIntervalNinetyFivePercent}"
                                    size="4"/>&nbsp;-&nbsp;<input
-                                type="text" name="definitions[${i}].maxConfidenceIntervalNinetyFivePercent"
+                                type="number" name="definitions[${i}].maxConfidenceIntervalNinetyFivePercent"
                                 class="input-field input-sm"
                                 value="${definitions[i].maxConfidenceIntervalNinetyFivePercent}" size="4"/></td>
                     </tr>

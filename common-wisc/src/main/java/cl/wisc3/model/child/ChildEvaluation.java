@@ -5,6 +5,7 @@ import cl.wisc3.config.JPA;
 import cl.wisc3.model.base.BaseEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
@@ -15,8 +16,10 @@ import java.util.List;
 public class ChildEvaluation extends BaseEntity {
     @ManyToOne
     private ChildInfo child;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<ChildEvaluationScore> scores = new ArrayList<ChildEvaluationScore>();
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<ChildScaleScore> scaleScores = new ArrayList<ChildScaleScore>();
     private int testDay;
     private int testMonth;
     private int testYear;
@@ -39,6 +42,14 @@ public class ChildEvaluation extends BaseEntity {
 
     public void setScores(List<ChildEvaluationScore> scores) {
         this.scores = scores;
+    }
+
+    public List<ChildScaleScore> getScaleScores() {
+        return scaleScores;
+    }
+
+    public void setScaleScores(List<ChildScaleScore> scaleScores) {
+        this.scaleScores = scaleScores;
     }
 
     public int getTestDay() {
@@ -107,5 +118,9 @@ public class ChildEvaluation extends BaseEntity {
 
     public static List<ChildEvaluation> getByChild(String altKey) {
         return JPA.query("SELECT e FROM ChildEvaluation e INNER JOIN e.child c WHERE c.altKey = ?1 ORDER BY e.testDate", altKey);
+    }
+
+    public static ChildEvaluation findByAltKey(String altKey) {
+        return JPA.findByAltKey(ChildEvaluation.class, altKey);
     }
 }

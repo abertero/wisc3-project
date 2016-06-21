@@ -4,9 +4,8 @@ import cl.wisc3.config.JPA;
 import cl.wisc3.enums.EvaluationType;
 import cl.wisc3.model.base.NamedBaseEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,6 +15,8 @@ public class EvaluationDefinition extends NamedBaseEntity {
     private int alternativeMaxRange;
     @Enumerated(EnumType.STRING)
     private EvaluationType type;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<EvaluationDefinitionScale> scales = new ArrayList<EvaluationDefinitionScale>();
 
     public int getMaxRange() {
         return maxRange;
@@ -39,6 +40,14 @@ public class EvaluationDefinition extends NamedBaseEntity {
 
     public void setType(EvaluationType type) {
         this.type = type;
+    }
+
+    public List<EvaluationDefinitionScale> getScales() {
+        return scales;
+    }
+
+    public void setScales(List<EvaluationDefinitionScale> scales) {
+        this.scales = scales;
     }
 
     public static EvaluationDefinition findByAltKey(String altKey) {

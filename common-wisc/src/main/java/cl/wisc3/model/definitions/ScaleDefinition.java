@@ -97,4 +97,8 @@ public class ScaleDefinition extends BaseEntity {
     public static List<ScaleDefinition> findByScale(Scale scale) {
         return JPA.query("SELECT s FROM ScaleDefinition s WHERE s.scale = ?1 ORDER BY s.scaleScoreSum", scale);
     }
+
+    public static ScaleDefinition findByScaleAndSum(Scale scale, Integer scaleScoreSum) {
+        return JPA.querySingle("SELECT s FROM ScaleDefinition s WHERE s.scale = ?1 AND s.scaleScoreSum = ?2", scale, scaleScoreSum);
+    }
 }

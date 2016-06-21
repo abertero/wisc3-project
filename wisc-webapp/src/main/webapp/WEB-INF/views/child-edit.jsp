@@ -39,7 +39,7 @@
                 <tr>
                     <td><c:out value="${evaluation.testDateDetails}"/></td>
                     <td><c:out value="${evaluation.childAgeDetails}"/></td>
-                    <td><a href="${ctx}/evaluation/view/${child.altKey}"><span class="glyphicon glyphicon-search"
+                    <td><a href="${ctx}/evaluation/view/${evaluation.altKey}"><span class="glyphicon glyphicon-search"
                                                                                aria-hidden="true"
                                                                                aria-label="<spring:message code="evaluation.editChildren.evaluation.view"/>"></span></a>
                     </td>

@@ -96,4 +96,31 @@ public class ChildLevel extends NamedBaseEntity {
     public static List<ChildLevel> findAll() {
         return JPA.findAll(ChildLevel.class, ORDER);
     }
+
+    public static ChildLevel findByChildAge(AgeDetails ageDetails) {
+        List<ChildLevel> byYear = findByYear(ageDetails.getYears());
+        if (byYear.size() > 1) {
+            for (ChildLevel level : byYear) {
+                if (level.contains(ageDetails)) {
+                    return level;
+                }
+            }
+        }
+        return byYear.get(0);
+    }
+
+    private boolean contains(AgeDetails ageDetails) {
+        if (yearsStart <= ageDetails.getYears() && ageDetails.getYears() <= yearsEnd) {
+            if (monthsStart <= ageDetails.getMonths() && ageDetails.getMonths() <= monthsEnd) {
+                if (daysStart <= ageDetails.getDays() && ageDetails.getDays() <= daysEnd) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static List<ChildLevel> findByYear(int years) {
+        return JPA.query("SELECT l FROM ChildLevel l WHERE l.yearsStart = ?1 OR l.yearsEnd = ?2 ORDER BY l.monthsStart", years, years);
+    }
 }

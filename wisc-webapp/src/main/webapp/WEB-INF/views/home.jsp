@@ -20,6 +20,8 @@
                 code="home.ref.scale.select"/></a></li>
         <li><a href="${ctx}/evaluation/list"><spring:message
                 code="home.ref.evaluation.list"/></a></li>
+        <li><a href="${ctx}/evaluation/scale"><spring:message
+                code="home.ref.evaluation.scale"/></a></li>
     </ul>
 </div>
 

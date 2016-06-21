@@ -90,4 +90,8 @@ public class EvaluationDefinitionService {
     public ChildEvaluation findEvaluationByAltKey(String altKey) {
         return ChildEvaluation.findByAltKey(altKey);
     }
+
+    public List<ChildEvaluationScore> findScoresByEvaluationAltKey(String altKey) {
+        return ChildEvaluationScore.findByChildEvaluationAltKey(altKey);
+    }
 }

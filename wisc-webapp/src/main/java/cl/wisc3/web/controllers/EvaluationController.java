@@ -3,6 +3,7 @@ package cl.wisc3.web.controllers;
 import cl.wisc3.enums.EvaluationType;
 import cl.wisc3.enums.Scale;
 import cl.wisc3.model.child.ChildEvaluation;
+import cl.wisc3.model.child.ChildEvaluationScore;
 import cl.wisc3.model.child.ChildInfo;
 import cl.wisc3.model.definitions.EvaluationDefinition;
 import cl.wisc3.web.beans.crud.CrudType;
@@ -75,9 +76,11 @@ public class EvaluationController {
     @RequestMapping(value = "view/{altKey}", method = RequestMethod.GET)
     public ModelAndView viewEvaluation(@PathVariable String altKey) {
         ChildEvaluation evaluation = evaluationDefinitionService.findEvaluationByAltKey(altKey);
+        List<ChildEvaluationScore> scores = evaluationDefinitionService.findScoresByEvaluationAltKey(altKey);
         if (evaluation != null) {
             ModelAndView mv = new ModelAndView("evaluation-view");
             mv.addObject("evaluation", evaluation);
+            mv.addObject("scores", scores);
             return mv;
         } else {
             return new ModelAndView("redirect:/evaluation/list");

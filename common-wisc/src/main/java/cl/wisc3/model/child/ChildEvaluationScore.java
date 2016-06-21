@@ -1,11 +1,13 @@
 package cl.wisc3.model.child;
 
+import cl.wisc3.config.JPA;
 import cl.wisc3.model.base.BaseEntity;
 import cl.wisc3.model.definitions.EvaluationDefinition;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import java.util.List;
 
 @Entity
 public class ChildEvaluationScore extends BaseEntity {
@@ -46,5 +48,9 @@ public class ChildEvaluationScore extends BaseEntity {
 
     public void setRealScore(int realScore) {
         this.realScore = realScore;
+    }
+
+    public static List<ChildEvaluationScore> findByChildEvaluationAltKey(String altKey) {
+        return JPA.query("SELECT cs FROM ChildEvaluationScore cs WHERE cs.evaluation.altKey = ?1", altKey);
     }
 }

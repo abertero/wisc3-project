@@ -16,9 +16,9 @@ import java.util.List;
 public class ChildEvaluation extends BaseEntity {
     @ManyToOne
     private ChildInfo child;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<ChildEvaluationScore> scores = new ArrayList<ChildEvaluationScore>();
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<ChildScaleScore> scaleScores = new ArrayList<ChildScaleScore>();
     private int testDay;
     private int testMonth;

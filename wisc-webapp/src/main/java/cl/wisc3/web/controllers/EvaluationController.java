@@ -1,6 +1,7 @@
 package cl.wisc3.web.controllers;
 
 import cl.wisc3.enums.EvaluationType;
+import cl.wisc3.enums.Scale;
 import cl.wisc3.model.child.ChildEvaluation;
 import cl.wisc3.model.child.ChildInfo;
 import cl.wisc3.model.definitions.EvaluationDefinition;
@@ -17,10 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/evaluation/*")
@@ -100,5 +98,16 @@ public class EvaluationController {
         } else {
             return new ModelAndView("redirect:/evaluation/list");
         }
+    }
+
+    @RequestMapping(value = "scale", method = RequestMethod.GET)
+    public ModelAndView selectScale() {
+        ModelAndView mv = new ModelAndView("evaluation-scale");
+        List<EvaluationDefinition> definitions = evaluationDefinitionService.findByEvaluationType(EvaluationType.VERBAL);
+        definitions.addAll(evaluationDefinitionService.findByEvaluationType(EvaluationType.EXECUTION));
+        List<Scale> scales = Arrays.asList(Scale.values());
+        mv.addObject("scales", scales);
+        mv.addObject("definitions", definitions);
+        return mv;
     }
 }

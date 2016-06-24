@@ -1,12 +1,11 @@
 package cl.wisc3.model.child;
 
+import cl.wisc3.enums.IQ;
 import cl.wisc3.model.base.BaseEntity;
 import cl.wisc3.model.definitions.EvaluationDefinition;
 import cl.wisc3.model.definitions.ScaleDefinition;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class ChildScaleScore extends BaseEntity {
@@ -16,6 +15,8 @@ public class ChildScaleScore extends BaseEntity {
     private ScaleDefinition definition;
     private int sumScore;
     private int ci;
+    @Enumerated(EnumType.STRING)
+    private IQ iq;
 
     public ChildEvaluation getEvaluation() {
         return evaluation;
@@ -47,5 +48,10 @@ public class ChildScaleScore extends BaseEntity {
 
     public void setCi(int ci) {
         this.ci = ci;
+        this.iq = IQ.qualifyIQ(ci);
+    }
+
+    public IQ getIq() {
+        return iq;
     }
 }

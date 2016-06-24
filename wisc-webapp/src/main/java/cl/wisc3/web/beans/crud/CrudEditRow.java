@@ -15,6 +15,8 @@ public class CrudEditRow {
     private static final String TEXTAREA_COLS_DEFAULT = "20";
     private static final String TEXTAREA_ROWS_DEFAULT = "3";
 
+    public static final String TRUE_STRING = "true";
+
     private String name;
     private String displayName;
     private String value;
@@ -93,6 +95,13 @@ public class CrudEditRow {
                     builder.append(String.format("<option %s value='%s'>%s</option>", listValue.equals(value) ? "selected" : "", listValue, listValue));
                 }
                 builder.append("</select>");
+                break;
+            case CHECKBOX:
+                builder.append(String.format("<input class='form-control' type='checkbox' name='values[%s]' value='true' ", name));
+                if (TRUE_STRING.equals(value)) {
+                    builder.append("checked");
+                }
+                builder.append(" />");
                 break;
         }
         return builder.toString();

@@ -3,6 +3,7 @@ package cl.wisc3.web.services.crud;
 import cl.wisc3.enums.EvaluationType;
 import cl.wisc3.model.definitions.EvaluationDefinition;
 import cl.wisc3.web.beans.crud.*;
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.stereotype.Component;
@@ -51,6 +52,7 @@ public class CrudEvaluationDefinition implements CrudBaseEntity {
         definition.setType(EvaluationType.getByName(crudEdit.getValue("type")));
         definition.setMaxRange(NumberUtils.toInt(crudEdit.getValue("maxRange")));
         definition.setAlternativeMaxRange(NumberUtils.toInt(crudEdit.getValue("alternativeMaxRange")));
+        definition.setComplementary(CrudEditRow.TRUE_STRING.equals(crudEdit.getValue("complementary")));
         definition.save();
     }
 
@@ -64,9 +66,15 @@ public class CrudEvaluationDefinition implements CrudBaseEntity {
         crudEdit.addRow(new CrudEditRow(type, "description", definition.getDescription(), CrudEditType.TEXT));
         crudEdit.addRow(new CrudEditRow(type, "maxRange", String.valueOf(definition.getMaxRange()), CrudEditType.TEXT));
         crudEdit.addRow(new CrudEditRow(type, "alternativeMaxRange", String.valueOf(definition.getAlternativeMaxRange()), CrudEditType.TEXT));
+        crudEdit.addRow(new CrudEditRow(type, "complementary", String.valueOf(definition.isComplementary()), CrudEditType.CHECKBOX));
         CrudEditRow typeSelectorRow = new CrudEditRow(type, "type", definition.getType() != null ? definition.getType().name() : "", CrudEditType.SELECT);
         typeSelectorRow.addValues(EvaluationType.values());
         crudEdit.addRow(typeSelectorRow);
+        CrudEditRow complementOfRow = new CrudEditRow(type, "type", definition.getComplementOf() != null ? definition.getComplementOf().getAltKey() : "", CrudEditType.SELECT);
+        for (EvaluationDefinition evaluationDefinition : EvaluationDefinition.findAll()) {
+            complementOfRow.getMappedValues().put(evaluationDefinition.getAltKey(), evaluationDefinition.getName());
+        }
+        crudEdit.addRow(complementOfRow);
         return crudEdit;
     }
 

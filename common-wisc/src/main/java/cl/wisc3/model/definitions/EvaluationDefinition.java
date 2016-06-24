@@ -17,6 +17,9 @@ public class EvaluationDefinition extends NamedBaseEntity {
     private EvaluationType type;
     @OneToMany(fetch = FetchType.EAGER)
     private List<EvaluationDefinitionScale> scales = new ArrayList<EvaluationDefinitionScale>();
+    private boolean complementary = false;
+    @OneToOne
+    private EvaluationDefinition complementOf;
 
     public int getMaxRange() {
         return maxRange;
@@ -52,6 +55,22 @@ public class EvaluationDefinition extends NamedBaseEntity {
 
     public static EvaluationDefinition findByAltKey(String altKey) {
         return JPA.findByAltKey(EvaluationDefinition.class, altKey);
+    }
+
+    public boolean isComplementary() {
+        return complementary;
+    }
+
+    public void setComplementary(boolean complementary) {
+        this.complementary = complementary;
+    }
+
+    public EvaluationDefinition getComplementOf() {
+        return complementOf;
+    }
+
+    public void setComplementOf(EvaluationDefinition complementOf) {
+        this.complementOf = complementOf;
     }
 
     public static List<EvaluationDefinition> findAll() {

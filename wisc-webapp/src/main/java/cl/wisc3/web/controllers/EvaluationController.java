@@ -111,6 +111,15 @@ public class EvaluationController {
         List<Scale> scales = Arrays.asList(Scale.values());
         mv.addObject("scales", scales);
         mv.addObject("definitions", definitions);
+        Map<String, Map<String, Boolean>> values = evaluationDefinitionService.getScalesAsMap();
+        mv.addObject("values", values);
         return mv;
+    }
+
+    @RequestMapping(value = "scale/save", method = RequestMethod.POST)
+    @Transactional
+    public ModelAndView saveScale(@RequestParam List<String> scales) {
+        evaluationDefinitionService.saveScales(scales);
+        return new ModelAndView("redirect:/evaluation/scale");
     }
 }

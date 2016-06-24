@@ -94,4 +94,33 @@ public class EvaluationDefinitionService {
     public List<ChildEvaluationScore> findScoresByEvaluationAltKey(String altKey) {
         return ChildEvaluationScore.findByChildEvaluationAltKey(altKey);
     }
+
+    public void saveScales(List<String> scales) {
+        for (String scaleDefinition : scales) {
+            String[] scaleDefinitionArray = scaleDefinition.split("#");
+            String definitionAltKey = scaleDefinitionArray[0];
+            String scaleCode = scaleDefinitionArray[1];
+            EvaluationDefinition definition = EvaluationDefinition.findByAltKey(definitionAltKey);
+            Scale scale = Scale.fromCode(scaleCode);
+            EvaluationDefinitionScale evaluationDefinitionScale = EvaluationDefinitionScale.findByEvaluationDefinitionAltKeyAndScale(definitionAltKey, scale);
+            if(evaluationDefinitionScale == null) {
+                evaluationDefinitionScale = new EvaluationDefinitionScale();
+                evaluationDefinitionScale.setDefinition(definition);
+                evaluationDefinitionScale.setScale(scale);
+                evaluationDefinitionScale.save();
+            }
+        }
+    }
+
+    public Map<String, Map<String, Boolean>> getScalesAsMap() {
+        HashMap<String, Map<String, Boolean>> result = new HashMap<>();
+        List<EvaluationDefinitionScale> definitionScales = EvaluationDefinitionScale.findAll();
+        for (EvaluationDefinitionScale evaluationDefinitionScale : definitionScales) {
+            if (result.get(evaluationDefinitionScale.getDefinition().getAltKey()) == null) {
+                result.put(evaluationDefinitionScale.getDefinition().getAltKey(), new HashMap<String, Boolean>());
+            }
+            result.get(evaluationDefinitionScale.getDefinition().getAltKey()).put(evaluationDefinitionScale.getScale().getCode(), true);
+        }
+        return result;
+    }
 }

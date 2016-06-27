@@ -28,10 +28,6 @@ public class EvaluationDefinitionService {
     public void saveEvaluation(ChildInfo child, Map<String, Integer> values) {
         ChildEvaluation evaluation = new ChildEvaluation();
         evaluation.setChild(child);
-        AgeDetails ageDetails = AgeCalculator.INSTANCE.calculate(evaluation.getTestDateDetails(), child.getBirthDetail());
-        evaluation.setAgeDay(ageDetails.getDays());
-        evaluation.setAgeMonth(ageDetails.getMonths());
-        evaluation.setAgeYear(ageDetails.getYears());
         Integer testDay = values.get(DAY_VALUE);
         Integer testMonth = values.get(MONTH_VALUE);
         Integer testYear = values.get(YEAR_VALUE);
@@ -41,6 +37,10 @@ public class EvaluationDefinitionService {
         Calendar calendar = Calendar.getInstance();
         calendar.set(testYear, testMonth, testDay);
         evaluation.setTestDate(calendar.getTime());
+        AgeDetails ageDetails = AgeCalculator.INSTANCE.calculate(evaluation.getTestDateDetails(), child.getBirthDetail());
+        evaluation.setAgeDay(ageDetails.getDays());
+        evaluation.setAgeMonth(ageDetails.getMonths());
+        evaluation.setAgeYear(ageDetails.getYears());
         evaluation.save();
         values.remove(DAY_VALUE);
         values.remove(MONTH_VALUE);

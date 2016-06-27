@@ -53,6 +53,11 @@ public class CrudEvaluationDefinition implements CrudBaseEntity {
         definition.setMaxRange(NumberUtils.toInt(crudEdit.getValue("maxRange")));
         definition.setAlternativeMaxRange(NumberUtils.toInt(crudEdit.getValue("alternativeMaxRange")));
         definition.setComplementary(CrudEditRow.TRUE_STRING.equals(crudEdit.getValue("complementary")));
+        if (StringUtils.isNotBlank(crudEdit.getValue("complementOf"))) {
+            definition.setComplementOf(EvaluationDefinition.findByAltKey(crudEdit.getValue("complementOf")));
+        } else {
+            definition.setComplementOf(null);
+        }
         definition.save();
     }
 
@@ -70,7 +75,8 @@ public class CrudEvaluationDefinition implements CrudBaseEntity {
         CrudEditRow typeSelectorRow = new CrudEditRow(type, "type", definition.getType() != null ? definition.getType().name() : "", CrudEditType.SELECT);
         typeSelectorRow.addValues(EvaluationType.values());
         crudEdit.addRow(typeSelectorRow);
-        CrudEditRow complementOfRow = new CrudEditRow(type, "type", definition.getComplementOf() != null ? definition.getComplementOf().getAltKey() : "", CrudEditType.SELECT);
+        CrudEditRow complementOfRow = new CrudEditRow(type, "complementOf", definition.getComplementOf() != null ? definition.getComplementOf().getAltKey() : "", CrudEditType.SELECT);
+        complementOfRow.getMappedValues().put("", "Seleccione");
         for (EvaluationDefinition evaluationDefinition : EvaluationDefinition.findAll()) {
             complementOfRow.getMappedValues().put(evaluationDefinition.getAltKey(), evaluationDefinition.getName());
         }
@@ -88,6 +94,8 @@ public class CrudEvaluationDefinition implements CrudBaseEntity {
         crudView.getAttributeValue().put("crud.evaluacion.displayName.maxRange", String.valueOf(definition.getMaxRange()));
         crudView.getAttributeValue().put("crud.evaluacion.displayName.alternativeMaxRange", String.valueOf(definition.getAlternativeMaxRange()));
         crudView.getAttributeValue().put("crud.evaluacion.displayName.type", definition.getType() != null ? definition.getType().name() : "");
+        crudView.getAttributeValue().put("crud.evaluacion.displayName.complementary", String.valueOf(definition.isComplementary()));
+        crudView.getAttributeValue().put("crud.evaluacion.displayName.complementOf", definition.getComplementOf() != null ? definition.getComplementOf().getName() : "");
         return crudView;
     }
 }

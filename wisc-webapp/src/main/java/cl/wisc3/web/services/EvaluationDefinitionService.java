@@ -9,12 +9,10 @@ import cl.wisc3.model.definitions.EquivalentScoreDefinition;
 import cl.wisc3.model.definitions.EvaluationDefinition;
 import cl.wisc3.model.definitions.EvaluationDefinitionScale;
 import cl.wisc3.model.definitions.ScaleDefinition;
+import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class EvaluationDefinitionService {
@@ -30,9 +28,10 @@ public class EvaluationDefinitionService {
     public void saveEvaluation(ChildInfo child, Map<String, Integer> values) {
         ChildEvaluation evaluation = new ChildEvaluation();
         evaluation.setChild(child);
-        evaluation.setAgeDay(child.getBirthDay());
-        evaluation.setAgeMonth(child.getBirthMonth());
-        evaluation.setAgeYear(child.getBirthYear());
+        AgeDetails ageDetails = AgeCalculator.INSTANCE.calculate(evaluation.getTestDateDetails(), child.getBirthDetail());
+        evaluation.setAgeDay(ageDetails.getDays());
+        evaluation.setAgeMonth(ageDetails.getMonths());
+        evaluation.setAgeYear(ageDetails.getYears());
         Integer testDay = values.get(DAY_VALUE);
         Integer testMonth = values.get(MONTH_VALUE);
         Integer testYear = values.get(YEAR_VALUE);
@@ -46,22 +45,17 @@ public class EvaluationDefinitionService {
         values.remove(DAY_VALUE);
         values.remove(MONTH_VALUE);
         values.remove(YEAR_VALUE);
-        Map<Scale, Integer> scaleSum = new HashMap<>();
-        for (Scale scale : Scale.values()) {
-            scaleSum.put(scale, 0);
-        }
+        Map<String, Integer> realScoreDefinition = new HashMap<>();
         for (Map.Entry<String, Integer> entry : values.entrySet()) {
             EvaluationDefinition definition = EvaluationDefinition.findByAltKey(entry.getKey());
             if (definition != null) {
                 int realScore = calculateScore(definition, evaluation, entry.getValue());
-                for (EvaluationDefinitionScale evaluationDefinitionScale : definition.getScales()) {
-                    Integer currentScore = scaleSum.get(evaluationDefinitionScale.getScale());
-                    scaleSum.put(evaluationDefinitionScale.getScale(), currentScore + realScore);
-                }
+                realScoreDefinition.put(definition.getAltKey(), realScore);
             } else {
                 continue;
             }
         }
+        Map<Scale, Integer> scaleSum = calculateScaleSum(realScoreDefinition);
         for (Map.Entry<Scale, Integer> scaleSumEntry : scaleSum.entrySet()) {
             ChildScaleScore scaleScore = new ChildScaleScore();
             scaleScore.setEvaluation(evaluation);
@@ -73,13 +67,63 @@ public class EvaluationDefinitionService {
         }
     }
 
+    private Map<Scale, Integer> calculateScaleSum(Map<String, Integer> realScoreDefinition) {
+        Map<Scale, Integer> scaleSum = new HashMap<>();
+        Map<Scale, List<EvaluationDefinitionScale>> evaluationDefinitionScalesAsMap = EvaluationDefinitionScale.findAllByScaleAsMap();
+        for (Scale scale : Scale.values()) {
+            int scaleSumValue = 0;
+            List<EvaluationDefinitionScale> definitionScales = evaluationDefinitionScalesAsMap.get(scale);
+            if (scale.isCheckForComplementary()) {
+                Set<String> hasComplementSet = new HashSet<>();
+                EvaluationDefinitionScale complement = null;
+                Set<String> keysWithZeroScore = new HashSet<>();
+                for (EvaluationDefinitionScale definitionScale : definitionScales) {
+                    if (definitionScale.getDefinition().isComplementary()) {
+                        if (definitionScale.getDefinition().getComplementOf() != null) {
+                            hasComplementSet.add(definitionScale.getDefinition().getComplementOf().getAltKey());
+                            Integer complementRealScore = realScoreDefinition.get(definitionScale.getDefinition().getComplementOf().getAltKey());
+                            if (complementRealScore == null || complementRealScore == 0) {
+                                Integer realScore = realScoreDefinition.get(definitionScale.getDefinition().getAltKey());
+                                scaleSumValue += realScore != null ? realScore : 0;
+                            }
+                        } else {
+                            complement = definitionScale;
+                        }
+                    } else {
+                        Integer realScore = realScoreDefinition.get(definitionScale.getDefinition().getAltKey());
+                        if (realScore != null && realScore > 0) {
+                            scaleSumValue += realScore;
+                        } else {
+                            keysWithZeroScore.add(definitionScale.getDefinition().getAltKey());
+                        }
+                    }
+                }
+                if (complement != null && !keysWithZeroScore.isEmpty()) {
+                    for (String keyWithZero : keysWithZeroScore) {
+                        if (!hasComplementSet.contains(keyWithZero)) {
+                            Integer realScore = realScoreDefinition.get(complement.getDefinition().getAltKey());
+                            scaleSumValue += realScore != null ? realScore : 0;
+                            break;
+                        }
+                    }
+                }
+            } else {
+                for (EvaluationDefinitionScale definitionScale : definitionScales) {
+                    Integer realScore = realScoreDefinition.get(definitionScale.getDefinition().getAltKey());
+                    scaleSumValue += realScore != null ? realScore : 0;
+                }
+            }
+            scaleSum.put(scale, scaleSumValue);
+        }
+        return scaleSum;
+    }
+
     private int calculateScore(EvaluationDefinition definition, ChildEvaluation evaluation, int scoreInt) {
         ChildEvaluationScore score = new ChildEvaluationScore();
         score.setDefinition(definition);
         score.setEvaluation(evaluation);
         score.setScore(scoreInt);
-        AgeDetails ageDetails = AgeCalculator.INSTANCE.calculate(evaluation.getTestDateDetails(), evaluation.getChildAgeDetails());
-        ChildLevel level = ChildLevel.findByChildAge(ageDetails);
+        ChildLevel level = ChildLevel.findByChildAge(evaluation.getChildAgeDetails());
         EquivalentScoreDefinition equivalentScore = EquivalentScoreDefinition.findByChildLevelAndEvaluationDefinitionAndEvaluationScore(level.getAltKey(), definition.getAltKey(), scoreInt);
         int realTotal = equivalentScore.getEquivalentScore();
         score.setRealScore(realTotal);
@@ -96,19 +140,17 @@ public class EvaluationDefinitionService {
     }
 
     public void saveScales(List<String> scales) {
+        EvaluationDefinitionScale.deleteAll();
         for (String scaleDefinition : scales) {
             String[] scaleDefinitionArray = scaleDefinition.split("#");
             String definitionAltKey = scaleDefinitionArray[0];
             String scaleCode = scaleDefinitionArray[1];
             EvaluationDefinition definition = EvaluationDefinition.findByAltKey(definitionAltKey);
             Scale scale = Scale.fromCode(scaleCode);
-            EvaluationDefinitionScale evaluationDefinitionScale = EvaluationDefinitionScale.findByEvaluationDefinitionAltKeyAndScale(definitionAltKey, scale);
-            if(evaluationDefinitionScale == null) {
-                evaluationDefinitionScale = new EvaluationDefinitionScale();
-                evaluationDefinitionScale.setDefinition(definition);
-                evaluationDefinitionScale.setScale(scale);
-                evaluationDefinitionScale.save();
-            }
+            EvaluationDefinitionScale evaluationDefinitionScale = new EvaluationDefinitionScale();
+            evaluationDefinitionScale.setDefinition(definition);
+            evaluationDefinitionScale.setScale(scale);
+            evaluationDefinitionScale.save();
         }
     }
 
@@ -122,5 +164,9 @@ public class EvaluationDefinitionService {
             result.get(evaluationDefinitionScale.getDefinition().getAltKey()).put(evaluationDefinitionScale.getScale().getCode(), true);
         }
         return result;
+    }
+
+    public List<ChildScaleScore> findScaleScoresByEvaluationAltKey(String altKey) {
+        return ChildScaleScore.findByChildEvaluationAltKey(altKey);
     }
 }

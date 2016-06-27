@@ -20,7 +20,9 @@
             <td><c:out value="${child.motherName}"/></td>
         </tr>
     </table>
-    <button class="btn btn-primary right" type="button" onclick="location.href='${ctx}/crud/edit/${entity}/${child.altKey}'"><spring:message code="evaluation.editChildren.editChild"/></button>
+    <button class="btn btn-primary right" type="button"
+            onclick="location.href='${ctx}/crud/edit/${entity}/${child.altKey}'"><spring:message
+            code="evaluation.editChildren.editChild"/></button>
 
 
     <h2><spring:message code="evaluation.editChildren.previousEvaluations"/></h2>
@@ -37,11 +39,11 @@
             <tbody>
             <c:forEach items="${evaluations}" var="evaluation">
                 <tr>
-                    <td><c:out value="${evaluation.testDateDetails}"/></td>
+                    <td><fmt:formatDate pattern="dd/MM/yyyy" value="${evaluation.testDate}"/></td>
                     <td><c:out value="${evaluation.childAgeDetails}"/></td>
                     <td><a href="${ctx}/evaluation/view/${evaluation.altKey}"><span class="glyphicon glyphicon-search"
-                                                                               aria-hidden="true"
-                                                                               aria-label="<spring:message code="evaluation.editChildren.evaluation.view"/>"></span></a>
+                                                                                    aria-hidden="true"
+                                                                                    aria-label="<spring:message code="evaluation.editChildren.evaluation.view"/>"></span></a>
                     </td>
                 </tr>
             </c:forEach>
@@ -53,8 +55,10 @@
     </c:if>
 
 
-    <button class="btn btn-primary" type="button" onclick="location.href='${ctx}/evaluation/new/${child.altKey}'"><spring:message code="evaluation.editChildren.create"/></button>
-    <button class="btn btn-default" type="button" onclick="location.href='${ctx}/evaluation/list'"><spring:message code="evaluation.editChildren.back"/></button>
+    <button class="btn btn-primary" type="button" onclick="location.href='${ctx}/evaluation/new/${child.altKey}'">
+        <spring:message code="evaluation.editChildren.create"/></button>
+    <button class="btn btn-default" type="button" onclick="location.href='${ctx}/evaluation/list'"><spring:message
+            code="evaluation.editChildren.back"/></button>
 </div>
 
 </body>

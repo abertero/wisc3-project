@@ -165,6 +165,12 @@ public class JPA {
         return em.createQuery(cq).getResultList();
     }
 
+    public static int update(String oql, Object... params) {
+        Query query = em.createQuery(oql);
+        setParamsArray(query, params);
+        return query.executeUpdate();
+    }
+
     public static int updateNamed(String oql, Object... pairParams) {
         Query query = em.createQuery(oql);
         setPairParams(query, pairParams);

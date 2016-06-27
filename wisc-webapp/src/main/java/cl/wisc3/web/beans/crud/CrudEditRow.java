@@ -97,7 +97,7 @@ public class CrudEditRow {
                 builder.append("</select>");
                 break;
             case CHECKBOX:
-                builder.append(String.format("<input class='form-control' type='checkbox' name='values[%s]' value='true' ", name));
+                builder.append(String.format("<input type='checkbox' name='values[%s]' value='true' ", name));
                 if (TRUE_STRING.equals(value)) {
                     builder.append("checked");
                 }

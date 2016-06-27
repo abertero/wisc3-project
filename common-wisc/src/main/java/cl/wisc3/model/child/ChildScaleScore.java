@@ -1,11 +1,13 @@
 package cl.wisc3.model.child;
 
+import cl.wisc3.config.JPA;
 import cl.wisc3.enums.IQ;
 import cl.wisc3.model.base.BaseEntity;
 import cl.wisc3.model.definitions.EvaluationDefinition;
 import cl.wisc3.model.definitions.ScaleDefinition;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class ChildScaleScore extends BaseEntity {
@@ -53,5 +55,9 @@ public class ChildScaleScore extends BaseEntity {
 
     public IQ getIq() {
         return iq;
+    }
+
+    public static List<ChildScaleScore> findByChildEvaluationAltKey(String altKey) {
+        return JPA.query("SELECT ss FROM ChildScaleScore ss WHERE ss.evaluation.altKey = ?1", altKey);
     }
 }

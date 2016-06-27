@@ -21,7 +21,9 @@
                 <tr>
                     <th><c:out value="${definition.name}"/></th>
                     <c:forEach items="${scales}" var="scale">
-                        <td><input type="checkbox" name="scales" value="${definition.altKey}#${scale.code}" ></td>
+                        <td><input type="checkbox" name="scales"
+                                   value="${definition.altKey}#${scale.code}" ${values[definition.altKey][scale.code] ? "checked" : ""} >
+                        </td>
                     </c:forEach>
                 </tr>
             </c:forEach>
